@@ -4,41 +4,45 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:layout_gravity="center"
     android:gravity="center_vertical"
+    android:orientation="vertical"
     android:padding="@dimen/layout_padding"
     tools:context="com.example.android.urbangarden.GardenSearchActivity">
+
     <LinearLayout
         android:id="@+id/search_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginBottom="@dimen/margin_bottom">
+        android:layout_marginBottom="@dimen/margin_bottom"
+        android:orientation="vertical">
+
         <EditText
             android:id="@+id/search_query_edit_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-           android:hint="@string/enter_search_query"
-            />
+            android:hint="@string/enter_search_query" />
+
         <Spinner
             android:id="@+id/search_choices_spinner"
             android:layout_width="125dp"
+            android:layout_height="wrap_content" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            />
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/search_by_location"/>
-    <Button
-        android:id="@+id/search_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="search"/>
+            android:text="@string/search_by_location" />
+
+        <Button
+            android:id="@+id/search_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="search" />
     </LinearLayout>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/search_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
