@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -16,12 +18,16 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 
+import com.example.android.urbangarden.controller.GardenAdapter;
 import com.example.android.urbangarden.location.GPSTracker;
 
 import com.example.android.urbangarden.Networking.NetworkUtility;
 import com.example.android.urbangarden.Networking.RetrofitListener;
 import com.example.android.urbangarden.model.Garden;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 public class GardenSearchActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
@@ -35,6 +41,9 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
     double latitude;
     double longitude;
 
+    private RecyclerView recyclerView;
+    List<Garden> gardenList = new ArrayList<>();
+
     private final String TAG = getClass().getSimpleName();
 
     @Override
@@ -44,6 +53,9 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
         setSearchSpinner();
 
         getLocation();
+        recyclerView = findViewById(R.id.search_recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,false));
+
 
 
         searchEditText = (EditText) findViewById(R.id.search_query_edit_text);
@@ -73,7 +85,8 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
             public void updateUI(Garden[] gardens) {
                 Log.d("update UI", String.valueOf(gardens.length));
                 //TODO add data to Recycler view
-
+                gardenList.addAll(Arrays.asList(gardens));
+                recyclerView.setAdapter(new GardenAdapter(gardenList));
             }
 
             @Override
@@ -83,6 +96,7 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
 
             }
         });
+
     }
     public void makeNetworkCall(String searchQuery, String queryType, RetrofitListener listener){
         NetworkUtility utility = NetworkUtility.getUtility();
