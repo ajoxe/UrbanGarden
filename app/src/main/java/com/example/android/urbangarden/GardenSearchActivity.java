@@ -15,9 +15,13 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+
+import com.example.android.urbangarden.location.GPSTracker;
+
 import com.example.android.urbangarden.Networking.NetworkUtility;
 import com.example.android.urbangarden.Networking.RetrofitListener;
 import com.example.android.urbangarden.model.Garden;
+
 
 
 public class GardenSearchActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
@@ -27,6 +31,10 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
     String searchQuery;
     String queryType;
 
+    GPSTracker gps;
+    double latitude;
+    double longitude;
+
     private final String TAG = getClass().getSimpleName();
 
     @Override
@@ -34,7 +42,12 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_garden_search);
         setSearchSpinner();
+
+        getLocation();
+
+
         searchEditText = (EditText) findViewById(R.id.search_query_edit_text);
+
     }
 
 
@@ -116,6 +129,21 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
                 Log.e(TAG, "No button was clicked");
         }
         return true;
+    }
+
+
+    private void getLocation() {
+        gps = new GPSTracker(GardenSearchActivity.this);
+
+        if (gps.canGetLocation()) {
+
+            latitude = gps.getLatitude();
+            longitude = gps.getLongitude();
+            Log.d("latitude", String.valueOf(latitude));
+            Log.d("longtitude", String.valueOf(longitude));
+        } else {
+            gps.showSettingsAlert();
+        }
     }
 
 }
