@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/UrbanGarden.iml" filepath="$PROJECT_DIR$/UrbanGarden.iml" />
+      <module fileurl="file://C:\Users\Chelsi\UrbanGarden\UrbanGarden.iml" filepath="C:\Users\Chelsi\UrbanGarden\UrbanGarden.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\Chelsi\UrbanGarden\app\app.iml" filepath="C:\Users\Chelsi\UrbanGarden\app\app.iml" />
     </modules>
   </component>
 </project>
