@@ -14,7 +14,6 @@ public interface GreenThumb_Caller {
 
     String baseURL = "https://data.cityofnewyork.us/";
 
-
     @GET("resource/yes4-7zbb.json")
     Call<GardenData> getGardenData(@Query("apitoken") String apitoken);
 }
