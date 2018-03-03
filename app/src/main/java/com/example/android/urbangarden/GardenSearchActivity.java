@@ -15,10 +15,17 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.example.android.urbangarden.Networking.NetworkUtility;
+import com.example.android.urbangarden.Networking.RetrofitListener;
+import com.example.android.urbangarden.model.Garden;
+
 
 public class GardenSearchActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     Spinner spinner;
     EditText searchEditText;
+    String searchOption;
+    String searchQuery;
+    String queryType;
 
     private final String TAG = getClass().getSimpleName();
 
@@ -27,24 +34,61 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_garden_search);
         setSearchSpinner();
+        searchEditText = (EditText) findViewById(R.id.search_query_edit_text);
     }
+
+
 
     //sets up the spinner
     public void setSearchSpinner() {
-        spinner = (Spinner) findViewById(R.id.search_choices_spinner);
+        spinner = (Spinner) findViewById(R.id.boro_choices_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.search_spinner_options, android.R.layout.simple_spinner_item);
+                R.array.boro_spinner_options, android.R.layout.simple_spinner_item);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
     }
 
+    public void onSearchClick(View view){
+        queryType = "postcode";
+        searchQuery = searchEditText.getText().toString();
+        makeNetworkCall(searchQuery, queryType, new RetrofitListener() {
+            @Override
+            public void updateUI(Garden[] gardens) {
+                Log.d("retrofit", "retrofit happened!");
+            }
+
+            @Override
+            public void onFailureAlert() {
+                Log.d("retrofit", "retrofit didn't happened!");
+
+            }
+        });
+    }
+
     //spinner selection on click
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        String searchOption = (String) parent.getItemAtPosition(position);
-        //TODO do stuff
+        searchOption = (String) parent.getItemAtPosition(position);
+        queryType = "boro";
+        makeNetworkCall(searchQuery, queryType, new RetrofitListener() {
+            @Override
+            public void updateUI(Garden[] gardens) {
+
+            }
+
+            @Override
+            public void onFailureAlert() {
+
+            }
+        });
+
+    }
+
+    public void makeNetworkCall(String searchQuery, String queryType, RetrofitListener listener){
+        NetworkUtility utility = NetworkUtility.getUtility();
+        utility.getGardensByQuery(searchQuery, queryType, listener);
     }
 
     @Override

@@ -21,23 +21,29 @@
             android:id="@+id/search_query_edit_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+           android:hint="@string/enter_search_query"
+            />
+        <Button
+            android:id="@+id/post_search_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="search"
+            android:onClick="onSearchClick"/>
+
             android:hint="@string/enter_search_query" />
 
+
         <Spinner
-            android:id="@+id/search_choices_spinner"
+            android:id="@+id/boro_choices_spinner"
             android:layout_width="125dp"
             android:layout_height="wrap_content" />
 
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/search_by_location" />
+       
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/search_by_location"/>
 
-        <Button
-            android:id="@+id/search_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="search" />
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
