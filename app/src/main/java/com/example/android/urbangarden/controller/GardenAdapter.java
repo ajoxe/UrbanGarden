@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import com.example.android.urbangarden.GardenViewHolder;
 import com.example.android.urbangarden.R;
 import com.example.android.urbangarden.model.Garden;
-import com.example.android.urbangarden.model.GardenData;
 
 import java.util.ArrayList;
 import java.util.List;
