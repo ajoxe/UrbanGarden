@@ -26,7 +26,7 @@ public class GardenViewHolder extends RecyclerView.ViewHolder {
         favesButton = itemView.findViewById(R.id.add_to_faves_button);
     }
 
-    public void bind(final GardenData gardenData) {
+    public void bind(final Garden gardenData) {
         gardenName.setText(gardenData.getGarden_name());
         neighborhood.setText(gardenData.getNeighborhoodname());
         borough.setText(gardenData.getBoro());
