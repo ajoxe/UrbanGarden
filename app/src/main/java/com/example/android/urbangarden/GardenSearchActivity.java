@@ -28,8 +28,9 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
         setContentView(R.layout.activity_garden_search);
         setSearchSpinner();
     }
+
     //sets up the spinner
-    public void setSearchSpinner(){
+    public void setSearchSpinner() {
         spinner = (Spinner) findViewById(R.id.search_choices_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.search_spinner_options, android.R.layout.simple_spinner_item);
@@ -38,6 +39,7 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
     }
+
     //spinner selection on click
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -51,7 +53,7 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu){
+    public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.garden_options_menu, menu);
         return true;
@@ -59,16 +61,17 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.fav:
                 Intent intent = new Intent(GardenSearchActivity.this, MyGardensActivity.class);
 //                intent.putExtra("myGardenList", "");
                 startActivity(intent);
-                Log.e(TAG,"Fav button was clicked");
+                Log.e(TAG, "Fav button was clicked");
                 break;
             default:
-                Log.e(TAG,"No button was clicked");
+                Log.e(TAG, "No button was clicked");
         }
         return true;
     }
+
 }
