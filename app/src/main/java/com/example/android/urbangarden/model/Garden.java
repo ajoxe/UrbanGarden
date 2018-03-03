@@ -5,4 +5,6 @@ package com.example.android.urbangarden.model;
  */
 
 public class Garden {
+
+
 }
