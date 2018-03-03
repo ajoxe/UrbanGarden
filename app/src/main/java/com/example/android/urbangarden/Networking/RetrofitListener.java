@@ -13,13 +13,6 @@ public interface RetrofitListener {
 
 
 
-//    method to alert user of network failure
-
-//    private void alertUserAboutError() {
-//        AlertDialogFragment alertDialogFragment = new AlertDialogFragment();
-//        alertDialogFragment.show(getFragmentManager(), "error_dialog");
-
-//    }
 
 
 
