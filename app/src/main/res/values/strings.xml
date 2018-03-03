@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">UrbanGarden</string>
+    <string name="enter_search_query">Enter zipcode or borough</string>
+    <string name="search_by_location">check to use location</string>
 </resources>
