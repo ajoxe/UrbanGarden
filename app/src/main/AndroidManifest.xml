@@ -23,7 +23,7 @@
         <activity android:name=".GardenSearchActivity" />
         <activity android:name=".GardenListActivity" />
         <activity android:name=".GardenDetailActivity" />
-        <activity android:name=".Networking.MyGardensActivity"></activity>
+        <activity android:name=".MyGardensActivity"></activity>
     </application>
 
 </manifest>
