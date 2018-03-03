@@ -1,9 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.example.android.urbangarden.GardenDetailActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/gardenImage"
+        android:layout_gravity="center"
+        android:src="@drawable/garden"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/gardenAddress"
+            android:text="Address of Garden to be put here"
+            android:gravity="center"
+            android:textSize="25sp"/>
+
+    <ImageButton
+        android:layout_width="50sp"
+        android:layout_height="50sp"
+        android:id="@+id/favoriteButtonImg"
+        android:layout_gravity="center"
+        android:src="@drawable/heart"
+        android:adjustViewBounds="true"
+        android:scaleType="center"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/faveText"
+        android:gravity="center"
+        android:text="Add to Favorites"/>
+</LinearLayout>
