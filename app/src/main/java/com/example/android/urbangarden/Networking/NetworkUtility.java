@@ -4,7 +4,9 @@ import android.util.Log;
 
 import com.example.android.urbangarden.model.Garden;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -29,6 +31,7 @@ public class NetworkUtility {
     public void getGardensByQuery(String searchQuery, String queryType, final RetrofitListener listener) {
         queryMap.put("$$app_token", app_token);
         queryMap.put(queryType, searchQuery);
+        Log.d("query type & seaerch", queryType + searchQuery);
 
         Call<Garden[]> getCommunityGardens = RetroFitInstance.getInstance()
                 .getApi()
@@ -37,13 +40,15 @@ public class NetworkUtility {
         getCommunityGardens.enqueue(new Callback<Garden[]>() {
             @Override
             public void onResponse(Call<Garden[]> call, Response<Garden[]> response) {
-                Log.d("retrofit", "retrofit happened!");
-                listener.updateUI(response.body());
+
+
+                Garden[] gardenArray = response.body();
+                listener.updateUI(gardenArray);
+                Log.d("retrofit response", String.valueOf(gardenArray.length));
             }
 
             @Override
             public void onFailure(Call<Garden[]> call, Throwable t) {
-                Log.d("retrofit", "retrofit didnt happened!");
                 listener.onFailureAlert();
 
             }

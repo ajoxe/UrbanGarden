@@ -66,24 +66,40 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
     public void onSearchClick(View view){
         queryType = "postcode";
         searchQuery = searchEditText.getText().toString();
+        Log.d("search query", searchQuery);
+
         makeNetworkCall(searchQuery, queryType, new RetrofitListener() {
             @Override
             public void updateUI(Garden[] gardens) {
-                Log.d("retrofit", "retrofit happened!");
+                Log.d("update UI", String.valueOf(gardens.length));
+                //TODO add data to Recycler view
+
             }
 
             @Override
             public void onFailureAlert() {
-                Log.d("retrofit", "retrofit didn't happened!");
+
+                alertUserAboutError();
 
             }
         });
+    }
+    public void makeNetworkCall(String searchQuery, String queryType, RetrofitListener listener){
+        NetworkUtility utility = NetworkUtility.getUtility();
+        utility.getGardensByQuery(searchQuery, queryType, listener);
+    }
+
+
+    private void alertUserAboutError() {
+        AlertDialogFragment alertDialogFragment = new AlertDialogFragment();
+        alertDialogFragment.show(getFragmentManager(), "error_dialog");
+
     }
 
     //spinner selection on click
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        searchOption = (String) parent.getItemAtPosition(position);
+       /* searchOption = (String) parent.getItemAtPosition(position);
         queryType = "boro";
         makeNetworkCall(searchQuery, queryType, new RetrofitListener() {
             @Override
@@ -95,14 +111,11 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
             public void onFailureAlert() {
 
             }
-        });
+        });*/
 
     }
 
-    public void makeNetworkCall(String searchQuery, String queryType, RetrofitListener listener){
-        NetworkUtility utility = NetworkUtility.getUtility();
-        utility.getGardensByQuery(searchQuery, queryType, listener);
-    }
+
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
