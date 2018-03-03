@@ -1,22 +1,20 @@
 package com.example.android.urbangarden.Networking;
 
+import com.example.android.urbangarden.model.GardenData;
+
+import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.GET;
+import retrofit2.http.Query;
 
 /**
  * Created by amirahoxendine on 3/3/18.
  */
 
-public class RetrofitService {
-    private static Retrofit retrofit = null;
+public interface RetrofitService {
+    String baseURL = "https://data.cityofnewyork.us/";
 
-    public static Retrofit getRetrofit(String basUrl) {
-        if (retrofit == null) {
-            retrofit = new Retrofit.Builder()
-                    .baseUrl(basUrl)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
-        }
-        return retrofit;
-    }
+    @GET("resource/yes4-7zbb.json")
+    Call<GardenData> getGardenData(@Query("apiToken") String apiToken);
 }

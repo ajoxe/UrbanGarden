@@ -10,24 +10,22 @@
     android:padding="@dimen/layout_padding"
     tools:context="com.example.android.urbangarden.GardenSearchActivity">
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:id="@+id/search_layout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_marginBottom="@dimen/margin_bottom">
         <EditText
             android:id="@+id/search_query_edit_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/enter_search_query"
+           android:hint="@string/enter_search_query"
             />
         <Spinner
             android:id="@+id/search_choices_spinner"
             android:layout_width="125dp"
             android:layout_height="wrap_content"
             />
-    </LinearLayout>
-
-
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -37,5 +35,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="search"/>
+    </LinearLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/search_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>
