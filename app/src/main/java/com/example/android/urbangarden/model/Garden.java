@@ -1,10 +1,16 @@
 package com.example.android.urbangarden.model;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
+
 /**
  * Created by amirahoxendine on 3/3/18.
  */
-
+@Entity(tableName = "gardens")
 public class Garden {
+    @PrimaryKey @NonNull
+    String propid;
     String address;
     String bbl;
     String bin;
@@ -20,7 +26,7 @@ public class Garden {
     String neighborhoodname;
     String nta;
     String postcode;
-    String propid;
+    String status;
     String size;
 
     public String getAddress() {

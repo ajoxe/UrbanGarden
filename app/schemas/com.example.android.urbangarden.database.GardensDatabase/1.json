@@ -1,0 +1,135 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "57ab14a055fe3eef0c1a3e2017731853",
+    "entities": [
+      {
+        "tableName": "gardens",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`propid` TEXT NOT NULL, `address` TEXT, `bbl` TEXT, `bin` TEXT, `boro` TEXT, `census_tract` TEXT, `community_board` TEXT, `council_district` TEXT, `cross_streets` TEXT, `garden_name` TEXT, `jurisdiction` TEXT, `latitude` TEXT, `longitude` TEXT, `neighborhoodname` TEXT, `nta` TEXT, `postcode` TEXT, `status` TEXT, `size` TEXT, PRIMARY KEY(`propid`))",
+        "fields": [
+          {
+            "fieldPath": "propid",
+            "columnName": "propid",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "address",
+            "columnName": "address",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "bbl",
+            "columnName": "bbl",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "bin",
+            "columnName": "bin",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "boro",
+            "columnName": "boro",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "census_tract",
+            "columnName": "census_tract",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "community_board",
+            "columnName": "community_board",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "council_district",
+            "columnName": "council_district",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "cross_streets",
+            "columnName": "cross_streets",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "garden_name",
+            "columnName": "garden_name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "jurisdiction",
+            "columnName": "jurisdiction",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "latitude",
+            "columnName": "latitude",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "longitude",
+            "columnName": "longitude",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "neighborhoodname",
+            "columnName": "neighborhoodname",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "nta",
+            "columnName": "nta",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "postcode",
+            "columnName": "postcode",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "status",
+            "columnName": "status",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "size",
+            "columnName": "size",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "propid"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"57ab14a055fe3eef0c1a3e2017731853\")"
+    ]
+  }
+}

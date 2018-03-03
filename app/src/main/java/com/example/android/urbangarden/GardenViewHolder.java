@@ -7,7 +7,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.android.urbangarden.model.Garden;
-import com.example.android.urbangarden.model.GardenData;
 
 /**
  * Created by amirahoxendine on 3/3/18.
