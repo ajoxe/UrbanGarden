@@ -53,6 +53,7 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
     public void onSearchClick(View view){
         queryType = "postcode";
         searchQuery = searchEditText.getText().toString();
+        Log.d("search query", searchQuery);
         makeNetworkCall(searchQuery, queryType, new RetrofitListener() {
             @Override
             public void updateUI(Garden[] gardens) {
@@ -70,7 +71,7 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
     //spinner selection on click
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        searchOption = (String) parent.getItemAtPosition(position);
+       /* searchOption = (String) parent.getItemAtPosition(position);
         queryType = "boro";
         makeNetworkCall(searchQuery, queryType, new RetrofitListener() {
             @Override
@@ -82,7 +83,7 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
             public void onFailureAlert() {
 
             }
-        });
+        });*/
 
     }
 
