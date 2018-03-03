@@ -15,10 +15,16 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.example.android.urbangarden.location.GPSTracker;
+
 
 public class GardenSearchActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     Spinner spinner;
     EditText searchEditText;
+
+    GPSTracker gps;
+    double latitude;
+    double longitude;
 
     private final String TAG = getClass().getSimpleName();
 
@@ -27,6 +33,8 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_garden_search);
         setSearchSpinner();
+        getLocation();
+
     }
     //sets up the spinner
     public void setSearchSpinner(){
@@ -70,5 +78,19 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
                 Log.e(TAG,"No button was clicked");
         }
         return true;
+    }
+
+    private void getLocation() {
+        gps = new GPSTracker(GardenSearchActivity.this);
+
+        if (gps.canGetLocation()) {
+
+            latitude = gps.getLatitude();
+            longitude = gps.getLongitude();
+            Log.d("latitude", String.valueOf(latitude));
+            Log.d("longtitude", String.valueOf(longitude));
+        } else {
+            gps.showSettingsAlert();
+        }
     }
 }
