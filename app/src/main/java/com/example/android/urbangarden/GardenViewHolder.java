@@ -3,6 +3,9 @@ package com.example.android.urbangarden;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -21,6 +24,8 @@ public class GardenViewHolder extends RecyclerView.ViewHolder {
 
     private TextView gardenName, neighborhood, borough;
     private Button favesButton;
+    Context context;
+
 
     public GardenViewHolder(View itemView) {
         super(itemView);
@@ -28,6 +33,8 @@ public class GardenViewHolder extends RecyclerView.ViewHolder {
         neighborhood = itemView.findViewById(R.id.neighborhood_textview);
         borough = itemView.findViewById(R.id.borough_textview);
         favesButton = itemView.findViewById(R.id.add_to_faves_button);
+
+
     }
 
     public void bind(final Garden gardenData, final Context context) {
@@ -52,9 +59,14 @@ public class GardenViewHolder extends RecyclerView.ViewHolder {
         favesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 String gardenId = gardenData.getPropid();
+                favesButton.setBackground(ContextCompat.getDrawable(context, R.drawable.ic_filter_vintage_black2_24dp));
+
+
                 GardensDataManager.updateGardenToSaved(gardenId, GardensDatabase.getGardensDatabase(context));
                 Log.d("faves onclick", "SAVED GARDEN  : ");
+
             }
         });
     }
