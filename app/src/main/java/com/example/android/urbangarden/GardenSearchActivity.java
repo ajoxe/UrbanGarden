@@ -54,17 +54,15 @@ import java.util.List;
 public class GardenSearchActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     Spinner spinner;
     EditText searchEditText;
-    String spinnerOption;
-    String searchQuery;
-    String queryType;
     Button getUserLocationButton;
-
     TextView searchToggle;
     CheckBox favesCheckBox;
     LinearLayout searchLayout;
     Context context;
 
-
+    String spinnerOption;
+    String searchQuery;
+    String queryType;
     String zipEditTextString;
     String spinnerChoiceResult = "";
 
@@ -94,14 +92,8 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
         getUserLocationButton = (Button) findViewById(R.id.get_location_button);
 
         searchToggle = (TextView) findViewById(R.id.search_toggle_text_view);
-        searchToggle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                v.setVisibility(View.GONE);
-                searchLayout.setVisibility(View.VISIBLE);
-            }
-        });
         searchLayout = (LinearLayout) findViewById(R.id.search_layout);
+        setToggleClick();
         getLocation();
         recyclerView = findViewById(R.id.search_recycler_view);
         gardenAdapter = new GardenAdapter(gardenList, context);
@@ -143,6 +135,7 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
         if (!zipEditTextString.equals("")) {
             queryType = "postcode";
             searchQuery = zipEditTextString;
+
         } else if (!spinnerChoiceResult.equals("")){
             queryType = "boro";
             searchQuery = spinnerChoiceResult;
@@ -156,7 +149,7 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
             @Override
             public void updateUI(Garden[] gardens) {
                 Log.d("update UI", String.valueOf(gardens.length));
-                //TODO add data to Recycler view
+
                 if(gardenList.size() != 0){
                     gardenList.clear();
                 }
@@ -172,6 +165,32 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
 
             }
         });
+
+    }
+
+    public void makeCallWithZip(String zip, String type){
+
+        makeNetworkCall(zip, type, new RetrofitListener() {
+            @Override
+            public void updateUI(Garden[] gardens) {
+                Log.d("update UI", String.valueOf(gardens.length));
+                if(gardenList.size() != 0){
+                    gardenList.clear();
+                }
+                gardenList.addAll(Arrays.asList(gardens));
+                gardenAdapter.notifyDataSetChanged();
+                GardensDataManager.populateDBWithList(gardenList, GardensDatabase.getGardensDatabase(context));
+            }
+
+            @Override
+            public void onFailureAlert() {
+                alertUserAboutError();
+            }
+        });
+
+    }
+
+    public void makeCallWithBoro(String searchQuery, String queryType){
 
     }
 
@@ -324,6 +343,21 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
         } else {
             gps.showSettingsAlert();
         }
+    }
+
+    public void setToggleClick(){
+        searchToggle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                v.setVisibility(View.GONE);
+                searchLayout.setVisibility(View.VISIBLE);
+                spinner.setSelection(0);
+                spinnerChoiceResult = "";
+                zipEditTextString = "";
+                searchEditText.setText("");
+            }
+        });
+
     }
 
 //    public void changeActionBarColor(){

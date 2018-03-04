@@ -32,24 +32,29 @@ public class SplashActivity extends AppCompatActivity {
         List<Garden> allGardens = new ArrayList<>();
         final List<Garden> gardens = new ArrayList<>();
         final List<Garden> savedGardens = new ArrayList<>();
+
         allGardens.addAll(dummyDataUtility.gardenList);
         Log.d("Dummy garden List", "size :" +allGardens.size());
         GardensDataManager.populateDBWithList(allGardens, GardensDatabase.getGardensDatabase(getApplicationContext()));
-
-        GardensDataManager.getDummySavedGardens(GardensDatabase.getGardensDatabase(getApplicationContext()), new DummyDataListener() {
-            @Override
-            public void postExecute(List<Garden> gardenList) {
-                savedGardens.addAll(gardenList);
-                Log.d("Dummy saved garden List", " database size :" + savedGardens.size());
-            }
-        });
         GardensDataManager.getAllDummyGardens(GardensDatabase.getGardensDatabase(getApplicationContext()), new DummyDataListener() {
             @Override
             public void postExecute(List<Garden> gardenList) {
                 gardens.addAll(gardenList);
                 Log.d("Dummy garden List", " database size :" + gardens.size());
+                for (int i = 0; i<4; i++){
+                    GardensDataManager.updateGardenToSaved(gardens.get(i).getPropid(), GardensDatabase.getGardensDatabase(getApplicationContext()));
+                }
+                GardensDataManager.getDummySavedGardens(GardensDatabase.getGardensDatabase(getApplicationContext()), new DummyDataListener() {
+                    @Override
+                    public void postExecute(List<Garden> gardenList) {
+                        savedGardens.addAll(gardenList);
+                        Log.d("Dummy saved garden List", " database size :" + savedGardens.size());
+                    }
+                });
+
             }
         });
+
 
     }
 }
