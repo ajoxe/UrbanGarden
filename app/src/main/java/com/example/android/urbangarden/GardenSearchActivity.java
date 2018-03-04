@@ -1,6 +1,9 @@
 package com.example.android.urbangarden;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -14,7 +17,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 
 
@@ -33,9 +38,14 @@ import java.util.List;
 public class GardenSearchActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     Spinner spinner;
     EditText searchEditText;
-    String searchOption;
+    String spinnerOption;
     String searchQuery;
     String queryType;
+
+    CheckBox favesCheckBox;
+
+
+    String zipEditTextString;
 
     GPSTracker gps;
     double latitude;
@@ -50,18 +60,17 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_garden_search);
+//        changeActionBarColor();
         setSearchSpinner();
 
         getLocation();
         recyclerView = findViewById(R.id.search_recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,false));
-
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
 
 
         searchEditText = (EditText) findViewById(R.id.search_query_edit_text);
 
     }
-
 
 
     //sets up the spinner
@@ -75,9 +84,13 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
         spinner.setOnItemSelectedListener(this);
     }
 
+
     public void onSearchClick(View view){
-        queryType = "postcode";
-        searchQuery = searchEditText.getText().toString();
+        zipEditTextString = searchEditText.getText().toString();
+        if (!zipEditTextString.equals("")){
+            queryType = "postcode";
+            searchQuery = zipEditTextString;
+        }
         Log.d("search query", searchQuery);
 
         makeNetworkCall(searchQuery, queryType, new RetrofitListener() {
@@ -98,7 +111,8 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
         });
 
     }
-    public void makeNetworkCall(String searchQuery, String queryType, RetrofitListener listener){
+
+    public void makeNetworkCall(String searchQuery, String queryType, RetrofitListener listener) {
         NetworkUtility utility = NetworkUtility.getUtility();
         utility.getGardensByQuery(searchQuery, queryType, listener);
     }
@@ -113,22 +127,29 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
     //spinner selection on click
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-       /* searchOption = (String) parent.getItemAtPosition(position);
-        queryType = "boro";
-        makeNetworkCall(searchQuery, queryType, new RetrofitListener() {
-            @Override
-            public void updateUI(Garden[] gardens) {
-
+        spinnerOption = (String) parent.getItemAtPosition(position);
+        if (!spinnerOption.equals("Search by borough")){
+            queryType = "boro";
+            switch(spinnerOption) {
+                case "Brooklyn":
+                    searchQuery = "B";
+                    break;
+                case "Manhattan":
+                    searchQuery = "M";
+                    break;
+                case "Bronx":
+                    searchQuery = "X";
+                    break;
+                case "Queens":
+                    searchQuery = "Q";
+                    break;
+                case "Staten Island":
+                    searchQuery = "R";
+                    break;
             }
 
-            @Override
-            public void onFailureAlert() {
-
             }
-        });*/
-
     }
-
 
 
     @Override
@@ -172,5 +193,9 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
             gps.showSettingsAlert();
         }
     }
-
+    
+//    public void changeActionBarColor(){
+//        android.app.ActionBar actionBar = getActionBar();
+//        actionBar.setBackgroundDrawable(new ColorDrawable(Color.GREEN));
+//    }
 }
