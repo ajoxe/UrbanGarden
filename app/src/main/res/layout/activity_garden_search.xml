@@ -7,26 +7,10 @@
     android:orientation="vertical"
     android:paddingTop="@dimen/layout_padding"
     android:id="@+id/parent"
+    android:background="@drawable/leafbackground"
     tools:context="com.example.android.urbangarden.GardenSearchActivity">
 
-    <TextView
-        android:id="@+id/search_toggle_text_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:drawableRight="@android:drawable/ic_menu_more"
-        android:drawableTint="#a9a9a9"
-        android:gravity="center_vertical"
-        android:background="#71945a"
-        android:paddingRight="@dimen/layout_padding"
-        android:text="@string/search_option_toggle"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium.Inverse"
-        android:textColor="#a9a9a9"
-        android:textSize="10sp"
-        android:paddingVertical="4dp"
-        android:paddingLeft="@dimen/layout_padding"
-        android:visibility="gone"
-       />
+
 
     <LinearLayout
         android:id="@+id/search_layout"
@@ -34,7 +18,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/layout_padding"
         android:orientation="vertical"
-        android:padding="@dimen/layout_padding">
+        android:padding="@dimen/layout_padding"
+        android:background="@color/colorPrimaryDark">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -79,16 +64,45 @@
 
         </LinearLayout>
     </LinearLayout>
-    <TextView
-        android:id="@+id/gardens_banner_text_view"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Community Gardens in "
-        android:padding="@dimen/layout_padding"
-        android:background="#79b2ae"
-        android:gravity="center"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Title.Inverse"
-        android:visibility="gone"/>
+        android:orientation="horizontal"
+        android:background="@color/colorPrimaryDark">
+        <TextView
+            android:id="@+id/gardens_banner_text_view"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:hint="Community Gardens in "
+            android:textSize="18sp"
+            android:padding="@dimen/layout_padding"
+            android:background="#79b2ae"
+            android:gravity="center"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Title.Inverse"
+            android:visibility="gone"/>
+        <TextView
+            android:id="@+id/search_toggle_text_view"
+            android:layout_width="0dp"
+            android:layout_weight=".5"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:drawableRight="@android:drawable/ic_menu_more"
+            android:drawableTint="#ffffff"
+            android:gravity="center_vertical"
+            android:background="@color/colorPrimaryDark"
+            android:paddingRight="@dimen/layout_padding"
+            android:text="@string/search_option_toggle"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium.Inverse"
+            android:textColor="#ffffff"
+            android:textSize="10sp"
+            android:paddingVertical="4dp"
+            android:paddingLeft="@dimen/layout_padding"
+            android:visibility="gone"
+            />
+
+    </LinearLayout>
+
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/search_recycler_view"
