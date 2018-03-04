@@ -4,46 +4,76 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="center"
-    android:gravity="center_vertical"
+    android:paddingTop="@dimen/layout_padding"
     android:orientation="vertical"
-    android:padding="@dimen/layout_padding"
+    android:background="@drawable/background_gradient"
     tools:context="com.example.android.urbangarden.GardenSearchActivity">
 
     <LinearLayout
-        android:id="@+id/search_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="@dimen/layout_padding"
         android:layout_marginBottom="@dimen/margin_bottom"
         android:orientation="vertical">
-
-        <EditText
-            android:id="@+id/search_query_edit_text"
+        <TextView
+            android:id="@+id/search_toggle_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-           android:hint="@string/enter_search_query" />
-
-        <Button
-            android:id="@+id/post_search_button"
-            android:layout_width="wrap_content"
+            android:text="@string/search_option_toggle"
+           android:drawableStart="@android:drawable/ic_menu_more"
+            android:drawableTint="@color/colorPrimaryDark"
+            android:layout_gravity="end"
+            android:textColor="@color/colorPrimaryDark"
+           android:textSize="16dp"
+            android:gravity="center"
+            android:visibility="gone"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium.Inverse"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="search"
-            android:onClick="onSearchClick"/>
-
-            android:hint="@string/enter_search_query" />
-
-
-        <Spinner
-            android:id="@+id/boro_choices_spinner"
-            android:layout_width="125dp"
-            android:layout_height="wrap_content" />
-
-        <Button
-            android:id="@+id/get_location_button"
-            android:layout_width="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/search_layout">
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="GET CURRENT LOCATION"
-            android:onClick="onSearchClick"/>
+            android:orientation="horizontal">
+            <Spinner
+                android:id="@+id/boro_choices_spinner"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/search_query_edit_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/enter_search_query" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/get_location_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="GET CURRENT LOCATION"
+                android:onClick="onSearchClick"/>
+
+            <Button
+                android:id="@+id/post_search_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/layout_padding"
+                android:onClick="onSearchClick"
+                android:text="search" />
+
+        </LinearLayout>
+        </LinearLayout>
+
 
     </LinearLayout>
 
