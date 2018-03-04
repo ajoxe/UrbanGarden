@@ -108,7 +108,8 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(GardenSearchActivity.this, MapsActivity.class);
-//                intent.putExtra("currentUser", username.getText().toString());
+                intent.putExtra("Latitude", latitude);
+                intent.putExtra("Longtitude", longitude);
                 startActivity(intent);
             }
         });
