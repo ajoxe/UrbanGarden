@@ -18,6 +18,7 @@ public class GardensDataManager {
     //update saved
     //delete
     private static String TAG = GardensDataManager.class.getSimpleName();
+
   public static List<Garden> savedGardenList = new ArrayList<>();
     public static void populateDBWithList(final List<Garden> gardenList, final GardensDatabase db){
     new GardensDBTasks(new DatabaseTaskListener() {
@@ -46,7 +47,7 @@ public class GardensDataManager {
             }
             @Override
             public void taskPostExecute() {
-                db.close();
+
             }
         }).execute();
         return savedGardenList;
@@ -61,7 +62,7 @@ public class GardensDataManager {
 
             @Override
             public void taskPostExecute() {
-                db.close();
+
             }
         }).execute();
     }
