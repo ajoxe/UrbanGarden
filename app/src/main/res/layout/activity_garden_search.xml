@@ -17,7 +17,7 @@
         android:drawableRight="@android:drawable/ic_menu_more"
         android:drawableTint="#a9a9a9"
         android:gravity="center_vertical"
-        android:background="#2e2e2e"
+        android:background="#71945a"
         android:paddingRight="@dimen/layout_padding"
         android:text="@string/search_option_toggle"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium.Inverse"
@@ -85,7 +85,7 @@
         android:layout_height="wrap_content"
         android:hint="Community Gardens in "
         android:padding="@dimen/layout_padding"
-        android:background="#000000"
+        android:background="#79b2ae"
         android:gravity="center"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Title.Inverse"
         android:visibility="gone"/>
