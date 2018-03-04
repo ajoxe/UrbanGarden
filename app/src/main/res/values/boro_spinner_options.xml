@@ -2,6 +2,7 @@
 <resources>
     <string-array
         name="boro_spinner_options">
+        <item>Search by borough</item>
         <item>Brooklyn</item>
         <item>Manhattan</item>
         <item>Queens</item>

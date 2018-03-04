@@ -16,6 +16,7 @@ import com.example.android.urbangarden.model.Garden;
 @Database(entities = {Garden.class}, version = 1)
 public abstract class GardensDatabase extends RoomDatabase{
     private static GardensDatabase INSTANCE;
+    public abstract GardensDao gardensDao();
 
 
 
