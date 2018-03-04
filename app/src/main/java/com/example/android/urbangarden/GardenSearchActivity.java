@@ -204,7 +204,7 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
         if (user != null) {
             userMenuItem.setTitle(user);
         } else {
-            userMenuItem.setTitle("user");
+            userMenuItem.setTitle("User");
         }
     }
 
