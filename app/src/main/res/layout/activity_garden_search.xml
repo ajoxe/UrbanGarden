@@ -4,47 +4,69 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="center"
-    android:gravity="center_vertical"
+    android:paddingTop="@dimen/layout_padding"
     android:orientation="vertical"
-
     android:background="@drawable/background_gradient"
     tools:context="com.example.android.urbangarden.GardenSearchActivity">
 
     <LinearLayout
-        android:id="@+id/search_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/layout_padding"
         android:layout_marginBottom="@dimen/margin_bottom"
         android:orientation="vertical">
-        <Spinner
-            android:id="@+id/boro_choices_spinner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
         <TextView
-            android:text="or"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <EditText
-            android:id="@+id/search_query_edit_text"
+            android:id="@+id/search_toggle_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="@string/enter_search_query" />
-
-
-        <Button
-            android:id="@+id/post_search_button"
-            android:layout_width="wrap_content"
+            android:text="@string/search_option_toggle"
+            android:visibility="gone"
+            android:gravity="center"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="onSearchClick"
-            android:text="search" />
-
-        <CheckBox
-            android:layout_width="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/search_layout">
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/search_by_location" />
+            android:orientation="horizontal">
+            <Spinner
+                android:id="@+id/boro_choices_spinner"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/search_query_edit_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/enter_search_query" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/location_search_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/search_by_location"
+                android:onClick="locationClick"/>
+            <Button
+                android:id="@+id/post_search_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/layout_padding"
+                android:onClick="onSearchClick"
+                android:text="search" />
+
+        </LinearLayout>
+        </LinearLayout>
+
 
     </LinearLayout>
 
