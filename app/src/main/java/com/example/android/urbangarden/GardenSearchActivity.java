@@ -241,6 +241,7 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         if (((TextView) parent.getChildAt(0))!= null){
             ((TextView) parent.getChildAt(0)).setTextColor(Color.parseColor("#90d0ab"));
+            ((TextView) parent.getChildAt(0)).setTextSize(14);
         }
 
         spinnerOption = (String) parent.getItemAtPosition(position);
