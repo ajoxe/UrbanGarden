@@ -113,7 +113,7 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 boolean handled = false;
-                if (actionId == EditorInfo.IME_ACTION_GO) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
                     onSearchClick(v);
                     handled = true;
                 }

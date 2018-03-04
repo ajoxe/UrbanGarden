@@ -42,7 +42,7 @@
                 android:textSize="14sp"
                 android:maxLines="1"
                 android:maxLength="5"
-                android:imeOptions="actionGo"
+                android:imeOptions="actionDone"
                 android:textColor="#90d0ab"
                 />
 
