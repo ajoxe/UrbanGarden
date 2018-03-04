@@ -1,5 +1,6 @@
 package com.example.android.urbangarden;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
@@ -19,7 +20,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -59,6 +63,7 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
     CheckBox favesCheckBox;
     LinearLayout searchLayout;
     Context context;
+    TextView textBanner;
 
     String spinnerOption;
     String searchQuery;
@@ -88,11 +93,12 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
 //        changeActionBarColor();
         context = getApplicationContext();
         setSearchSpinner();
+        setupUI(findViewById(R.id.parent));
 
         getUserLocationButton = (Button) findViewById(R.id.get_location_button);
-
         searchToggle = (TextView) findViewById(R.id.search_toggle_text_view);
         searchLayout = (LinearLayout) findViewById(R.id.search_layout);
+        textBanner = (TextView) findViewById(R.id.gardens_banner_text_view);
         setToggleClick();
         getLocation();
         recyclerView = findViewById(R.id.search_recycler_view);
@@ -115,8 +121,6 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
         });
     }
 
-
-
     //sets up the spinner
     public void setSearchSpinner() {
         spinner = (Spinner) findViewById(R.id.boro_choices_spinner);
@@ -133,13 +137,18 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
         searchLayout.setVisibility(View.GONE);
         searchToggle.setVisibility(View.VISIBLE);
         zipEditTextString = searchEditText.getText().toString();
+
         if (!zipEditTextString.equals("")) {
             queryType = "postcode";
             searchQuery = zipEditTextString;
+            textBanner.setText("Community Gardens in " + zipEditTextString);
+            textBanner.setVisibility(View.VISIBLE);
 
         } else if (!spinnerChoiceResult.equals("")){
             queryType = "boro";
             searchQuery = spinnerChoiceResult;
+            textBanner.setText(spinnerOption + "Community Gardens");
+            textBanner.setVisibility(View.VISIBLE);
         } else{
             //TODO location logic for queries and parameters
         }
@@ -356,10 +365,41 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
                 spinnerChoiceResult = "";
                 zipEditTextString = "";
                 searchEditText.setText("");
+                textBanner.setVisibility(View.GONE);
             }
         });
 
     }
+
+    public static void hideSoftKeyboard(Activity activity) {
+        InputMethodManager inputMethodManager =
+                (InputMethodManager) activity.getSystemService(
+                        Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(
+                activity.getCurrentFocus().getWindowToken(), 0);
+    }
+
+    public void setupUI(View view) {
+
+        // Set up touch listener for non-text box views to hide keyboard.
+        if (!(view instanceof EditText)) {
+            view.setOnTouchListener(new View.OnTouchListener() {
+                public boolean onTouch(View v, MotionEvent event) {
+                    hideSoftKeyboard(GardenSearchActivity.this);
+                    return false;
+                }
+            });
+        }
+
+        //If a layout container, iterate over children and seed recursion.
+        if (view instanceof ViewGroup) {
+            for (int i = 0; i < ((ViewGroup) view).getChildCount(); i++) {
+                View innerView = ((ViewGroup) view).getChildAt(i);
+                setupUI(innerView);
+            }
+        }
+    }
+
 
 //    public void changeActionBarColor(){
 //        android.app.ActionBar actionBar = getActionBar();
