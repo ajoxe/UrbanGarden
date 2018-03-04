@@ -59,7 +59,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="18dp"
                 android:onClick="onSearchClick"
-                android:text="use location instead"
+                android:text="get location"
                 android:textSize="10sp"
                 android:textColor="#90d0ab"
                 android:background="@drawable/roundedshape"/>
