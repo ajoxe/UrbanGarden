@@ -37,6 +37,9 @@ public interface GardensDao {
     @Delete
     void deleteGarden(Garden garden);
 
+    @Delete
+    void deleteGardenList(List<Garden> gardenList);
+
     @Query("SELECT COUNT(*) from gardens")
     int countGardens();
 }
