@@ -22,8 +22,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 
 import com.example.android.urbangarden.controller.GardenAdapter;
@@ -52,7 +55,7 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
     String searchQuery;
     String queryType;
     Button getUserLocationButton;
-TextView searchToggle;
+    TextView searchToggle;
     CheckBox favesCheckBox;
     LinearLayout searchLayout;
 
