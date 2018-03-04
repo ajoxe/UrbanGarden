@@ -6,6 +6,7 @@ import android.util.Log;
 import com.example.android.urbangarden.model.Garden;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -61,6 +62,7 @@ public class GardensDataManager {
             @Override
             public void backgroundTask() {
                savedGardenList.addAll(db.gardensDao().getSaved());
+                Collections.reverse(savedGardenList);
                Log.d(TAG, "saved size: " + savedGardenList.size());
             }
             @Override
