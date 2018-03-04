@@ -29,13 +29,18 @@
                 android:id="@+id/boro_choices_spinner"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_weight="1.5" />
 
             <EditText
                 android:id="@+id/search_query_edit_text"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight=".75"
                 android:layout_height="wrap_content"
                 android:hint="@string/enter_search_query"
+                android:inputType="number"
+                android:maxLines="1"
+                android:maxLength="5"
+                android:imeOptions="actionDone"
                 />
 
         </LinearLayout>
