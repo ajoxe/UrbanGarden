@@ -20,6 +20,9 @@ public class GardenDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_garden_detail);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.drawable.ic_filter_vintage_black_24dp);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
 
         parkName = findViewById(R.id.gardenName);
         parkAddress = findViewById(R.id.gardenAddress);

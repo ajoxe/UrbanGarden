@@ -107,6 +107,10 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
         searchEditText = (EditText) findViewById(R.id.search_query_edit_text);
 
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.drawable.ic_filter_vintage_black_24dp);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+
         Intent intent = getIntent();
         user = intent.getStringExtra("currentUser");
 
@@ -219,6 +223,10 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
     //spinner selection on click
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        if (((TextView) parent.getChildAt(0))!= null){
+            ((TextView) parent.getChildAt(0)).setTextColor(Color.parseColor("#90d0ab"));
+        }
+
         spinnerOption = (String) parent.getItemAtPosition(position);
         if (!spinnerOption.equals("Search by borough")) {
             switch (spinnerOption) {

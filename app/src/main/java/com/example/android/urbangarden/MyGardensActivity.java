@@ -27,9 +27,12 @@ public class MyGardensActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_gardens);
-        getSupportActionBar().setTitle("My Gardens");
+        getSupportActionBar().setTitle(" My Gardens");
        savedGardens.addAll(GardensDataManager.getSavedGardens(GardensDatabase.getGardensDatabase(getApplicationContext())));
         Log.d("saved activity", "list size" + savedGardens.size());
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.drawable.ic_filter_vintage_black_24dp);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
 
         context = getApplicationContext();
 
