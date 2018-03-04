@@ -56,12 +56,13 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <CheckBox
-                android:id="@+id/location_search_button"
+            <Button
+                android:id="@+id/get_location_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/search_by_location"
-                android:onClick="locationClick"/>
+                android:text="GET CURRENT LOCATION"
+                android:onClick="onSearchClick"/>
+
             <Button
                 android:id="@+id/post_search_button"
                 android:layout_width="wrap_content"

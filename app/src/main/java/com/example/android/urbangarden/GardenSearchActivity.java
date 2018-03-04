@@ -21,9 +21,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -34,6 +34,7 @@ import com.example.android.urbangarden.location.GPSTracker;
 
 import com.example.android.urbangarden.Networking.NetworkUtility;
 import com.example.android.urbangarden.Networking.RetrofitListener;
+import com.example.android.urbangarden.location.MapsActivity;
 import com.example.android.urbangarden.model.Garden;
 import com.example.android.urbangarden.userloginandregister.LoginActivity;
 import com.example.android.urbangarden.userloginandregister.MyPostsActivity;
@@ -53,7 +54,8 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
     String spinnerOption;
     String searchQuery;
     String queryType;
-TextView searchToggle;
+    Button getUserLocationButton;
+    TextView searchToggle;
     CheckBox favesCheckBox;
     LinearLayout searchLayout;
 
@@ -79,6 +81,9 @@ TextView searchToggle;
         setContentView(R.layout.activity_garden_search);
 //        changeActionBarColor();
         setSearchSpinner();
+
+        getUserLocationButton = (Button) findViewById(R.id.get_location_button);
+
         searchToggle = (TextView) findViewById(R.id.search_toggle_text_view);
         searchToggle.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,7 +103,16 @@ TextView searchToggle;
         Intent intent = getIntent();
         user = intent.getStringExtra("currentUser");
 
+        getUserLocationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(GardenSearchActivity.this, MapsActivity.class);
+//                intent.putExtra("currentUser", username.getText().toString());
+                startActivity(intent);
+            }
+        });
     }
+
 
 
     //sets up the spinner
@@ -294,7 +308,7 @@ TextView searchToggle;
             gps.showSettingsAlert();
         }
     }
-    
+
 //    public void changeActionBarColor(){
 //        android.app.ActionBar actionBar = getActionBar();
 //        actionBar.setBackgroundDrawable(new ColorDrawable(Color.GREEN));
