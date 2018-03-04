@@ -20,7 +20,9 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 
 import com.example.android.urbangarden.controller.GardenAdapter;
@@ -29,6 +31,8 @@ import com.example.android.urbangarden.location.GPSTracker;
 import com.example.android.urbangarden.Networking.NetworkUtility;
 import com.example.android.urbangarden.Networking.RetrofitListener;
 import com.example.android.urbangarden.model.Garden;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -41,8 +45,9 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
     String spinnerOption;
     String searchQuery;
     String queryType;
-
+TextView searchToggle;
     CheckBox favesCheckBox;
+    LinearLayout searchLayout;
 
 
     String zipEditTextString;
@@ -62,7 +67,15 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
         setContentView(R.layout.activity_garden_search);
 //        changeActionBarColor();
         setSearchSpinner();
-
+        searchToggle = (TextView) findViewById(R.id.search_toggle_text_view);
+        searchToggle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                v.setVisibility(View.GONE);
+                searchLayout.setVisibility(View.VISIBLE);
+            }
+        });
+        searchLayout = (LinearLayout) findViewById(R.id.search_layout);
         getLocation();
         recyclerView = findViewById(R.id.search_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
@@ -86,6 +99,8 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
 
 
     public void onSearchClick(View view){
+        searchLayout.setVisibility(View.GONE);
+        searchToggle.setVisibility(View.VISIBLE);
         zipEditTextString = searchEditText.getText().toString();
         if (!zipEditTextString.equals("")){
             queryType = "postcode";
@@ -177,6 +192,10 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
                 Log.e(TAG, "No button was clicked");
         }
         return true;
+    }
+
+    public void locationClick(View view){
+
     }
 
 

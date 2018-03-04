@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">UrbanGarden</string>
-    <string name="enter_search_query">Enter zipcode</string>
-    <string name="search_by_location">check to use location</string>
+    <string name="enter_search_query">or enter zipcode</string>
+    <string name="search_by_location">Use my location instead</string>
 
     <string name="title_activity_maps">Map</string>
 
@@ -11,5 +11,6 @@
     <string name="error_message">Oops. Sorry!</string>
     <string name="error_message2">Error. Network not available.</string>
     <string name="Ok_message">OK</string>
+    <string name="search_option_toggle">Search Options</string>
 
 </resources>
