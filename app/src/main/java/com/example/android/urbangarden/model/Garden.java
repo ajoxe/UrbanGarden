@@ -29,6 +29,14 @@ public class Garden {
     String status;
     String size;
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public String getAddress() {
         return address;
     }

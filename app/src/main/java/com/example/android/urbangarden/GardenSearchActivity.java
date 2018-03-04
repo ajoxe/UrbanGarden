@@ -33,7 +33,7 @@ import java.util.List;
 public class GardenSearchActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     Spinner spinner;
     EditText searchEditText;
-    String searchOption;
+    String spinnerOption;
     String searchQuery;
     String queryType;
 
@@ -113,19 +113,42 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
     //spinner selection on click
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-       /* searchOption = (String) parent.getItemAtPosition(position);
-        queryType = "boro";
-        makeNetworkCall(searchQuery, queryType, new RetrofitListener() {
-            @Override
-            public void updateUI(Garden[] gardens) {
+        spinnerOption = (String) parent.getItemAtPosition(position);
+        if (!spinnerOption.equals("Search by borough")){
+            queryType = "boro";
+            switch(spinnerOption) {
+                case "Brooklyn":
+                    searchQuery = "B";
+                    break;
+                case "Manhattan":
+                    searchQuery = "M";
+                    break;
+                case "Bronx":
+                    searchQuery = "X";
+                    break;
+                case "Queens":
+                    searchQuery = "Q";
+                    break;
+                case "Staten Island":
+                    searchQuery = "R";
+                    break;
+                default:
+                    searchQuery = "M";
+            }
+            makeNetworkCall(searchQuery, queryType, new RetrofitListener() {
+                @Override
+                public void updateUI(Garden[] gardens) {
+                    gardenList.addAll(Arrays.asList(gardens));
+                    recyclerView.setAdapter(new GardenAdapter(gardenList));
+                }
+
+                @Override
+                public void onFailureAlert() {
+                    alertUserAboutError();
+                }
+            });
 
             }
-
-            @Override
-            public void onFailureAlert() {
-
-            }
-        });*/
 
     }
 
