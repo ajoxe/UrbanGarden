@@ -98,6 +98,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             mMap.setMyLocationEnabled(true);
         }
 
+//        it works, but we need to get a complete address to get an correct location, the current address we get only has street number and name
         Geocoder coder = new Geocoder(getApplicationContext());
         List<Address> address1;
         LatLng p1 = null;

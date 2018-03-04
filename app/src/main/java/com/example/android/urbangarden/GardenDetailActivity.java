@@ -36,7 +36,7 @@ public class GardenDetailActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(GardenDetailActivity.this, MapsActivity.class);
                 intent.putExtra("GardenName",parkName.getText().toString());
-                intent.putExtra("GardenAddress",parkAddress.getText().toString());
+                intent.putExtra("GardenAddress",parkAddress.getText().toString() + "New York, NY");
                 startActivity(intent);
             }
         });
