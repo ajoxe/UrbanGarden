@@ -10,9 +10,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_filter_vintage_black_24dp"
+        android:icon="@drawable/leaflogodarkergreen"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/ic_filter_vintage_black_24dp"
+        android:roundIcon="@drawable/leaflogodarkergreen"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".GardenSearchActivity" />
