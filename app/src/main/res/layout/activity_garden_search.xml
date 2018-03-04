@@ -7,42 +7,44 @@
     android:layout_gravity="center"
     android:gravity="center_vertical"
     android:orientation="vertical"
-    android:padding="@dimen/layout_padding"
+
+    android:background="@drawable/background_gradient"
     tools:context="com.example.android.urbangarden.GardenSearchActivity">
 
     <LinearLayout
         android:id="@+id/search_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="@dimen/layout_padding"
         android:layout_marginBottom="@dimen/margin_bottom"
         android:orientation="vertical">
+        <Spinner
+            android:id="@+id/boro_choices_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:text="or"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
         <EditText
             android:id="@+id/search_query_edit_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-           android:hint="@string/enter_search_query"
-            />
+            android:hint="@string/enter_search_query" />
+
+
         <Button
             android:id="@+id/post_search_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="search"
-            android:onClick="onSearchClick"/>
+            android:onClick="onSearchClick"
+            android:text="search" />
 
-            android:hint="@string/enter_search_query" />
-
-
-        <Spinner
-            android:id="@+id/boro_choices_spinner"
-            android:layout_width="125dp"
-            android:layout_height="wrap_content" />
-
-       
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/search_by_location"/>
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/search_by_location" />
 
     </LinearLayout>
 

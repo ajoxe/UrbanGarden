@@ -25,7 +25,7 @@ public interface GardensDao {
     @Insert(onConflict = REPLACE)
     void insertAllGardens(List<Garden> garden);
 
-    @Query("SELECT * FROM gardens where id LIKE  :id")
+    @Query("SELECT * FROM gardens where propid LIKE  :id")
     Garden findGardenByID(String id);
 
     @Query("SELECT * FROM gardens where status LIKE  'saved'")
