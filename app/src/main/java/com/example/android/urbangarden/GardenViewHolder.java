@@ -1,11 +1,16 @@
 package com.example.android.urbangarden;
 
+import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.android.urbangarden.database.GardensDataManager;
+import com.example.android.urbangarden.database.GardensDatabase;
 import com.example.android.urbangarden.model.Garden;
 
 /**
@@ -25,7 +30,7 @@ public class GardenViewHolder extends RecyclerView.ViewHolder {
         favesButton = itemView.findViewById(R.id.add_to_faves_button);
     }
 
-    public void bind(final Garden gardenData) {
+    public void bind(final Garden gardenData, final Context context) {
         gardenName.setText(gardenData.getGarden_name());
         neighborhood.setText(gardenData.getNeighborhoodname());
         borough.setText(gardenData.getBoro());
@@ -42,6 +47,14 @@ public class GardenViewHolder extends RecyclerView.ViewHolder {
                 gardenDetailIntent.putExtra("cross streets", gardenData.getCross_streets());
                 itemView.getContext().startActivity(gardenDetailIntent);
 
+            }
+        });
+        favesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String gardenId = gardenData.getPropid();
+                GardensDataManager.updateGardenToSaved(gardenId, GardensDatabase.getGardensDatabase(context));
+                Log.d("faves onclick", "SAVED GARDEN  : ");
             }
         });
     }
