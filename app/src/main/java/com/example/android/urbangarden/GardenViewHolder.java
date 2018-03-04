@@ -40,7 +40,6 @@ public class GardenViewHolder extends RecyclerView.ViewHolder {
                 gardenDetailIntent.putExtra("address", gardenData.getAddress());
                 gardenDetailIntent.putExtra("postcode", gardenData.getPostcode());
                 gardenDetailIntent.putExtra("cross streets", gardenData.getCross_streets());
-
                 itemView.getContext().startActivity(gardenDetailIntent);
 
             }
