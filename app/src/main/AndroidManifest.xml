@@ -43,7 +43,12 @@
 
         <activity
             android:name=".location.MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
+            android:label="@string/title_activity_maps" />
+        <activity android:name=".userloginandregister.LoginActivity" />
+        <activity android:name=".userloginandregister.RegisterActivity" />
+        <activity android:name=".userloginandregister.SettingsActivity" />
+        <activity android:name=".userloginandregister.MyPostsActivity" />
+        <activity android:name=".userloginandregister.UserActivity"></activity>
     </application>
 
 </manifest>
