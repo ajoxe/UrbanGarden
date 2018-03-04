@@ -219,7 +219,7 @@ TextView searchToggle;
         if (user != null) {
             userMenuItem.setTitle(user);
         } else {
-            userMenuItem.setTitle("user");
+            userMenuItem.setTitle("User");
         }
     }
 
