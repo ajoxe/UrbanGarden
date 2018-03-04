@@ -21,10 +21,13 @@
             android:layout_height="wrap_content"
             android:text="@string/search_option_toggle"
            android:drawableStart="@android:drawable/ic_menu_more"
-            android:layout_gravity="center"
-            android:textColor="#ffffff"
+            android:drawableTint="@color/colorPrimaryDark"
+            android:layout_gravity="end"
+            android:textColor="@color/colorPrimaryDark"
+           android:textSize="16dp"
+            android:gravity="center"
             android:visibility="gone"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium.Inverse"
             />
         <LinearLayout
             android:layout_width="match_parent"
