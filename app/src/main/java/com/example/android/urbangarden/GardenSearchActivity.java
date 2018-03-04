@@ -65,7 +65,7 @@ TextView searchToggle;
     double longitude;
 
     SharedPreferences registerPref;
-    String user;
+    String user = null;
 
     private RecyclerView recyclerView;
     List<Garden> gardenList = new ArrayList<>();
@@ -192,26 +192,37 @@ TextView searchToggle;
         this.menu = menu;
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.garden_options_menu, menu);
-
-        if(user.equals(null)){
-            hideOption(1);
-        }else {
-            hideOption(0);
-        }
+        updateMenuTitles();
+        hideOption(user);
+        showOption(user);
         return true;
     }
 
-    private void hideOption(int id)
+    private void hideOption(String user)
     {
-        MenuItem item = menu.findItem(id);
-        item.setVisible(false);
+        MenuItem item = menu.findItem(R.id.login);
+        if(user != null) {
+            item.setVisible(false);
+        }
     }
 
-    private void showOption(int id)
+    private void showOption(String user)
     {
-        MenuItem item = menu.findItem(id);
-        item.setVisible(true);
+        MenuItem item = menu.findItem(R.id.login);
+        if(user == null) {
+            item.setVisible(true);
+        }
     }
+
+    private void updateMenuTitles() {
+        MenuItem userMenuItem = menu.findItem(R.id.user);
+        if (user != null) {
+            userMenuItem.setTitle(user);
+        } else {
+            userMenuItem.setTitle("user");
+        }
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -252,10 +263,11 @@ TextView searchToggle;
                 break;
 
             case R.id.sign_out:
-                Intent intent4 = new Intent(GardenSearchActivity.this, LoginActivity.class);
-//                intent.putExtra("myGardenList", "");
-                startActivity(intent4);
-                Log.e(TAG, "Fav button was clicked");
+                user = null;
+                updateMenuTitles();
+                hideOption(user);
+                showOption(user);
+                Log.e(TAG, "Sign out button was clicked");
                 break;
 
             default:
