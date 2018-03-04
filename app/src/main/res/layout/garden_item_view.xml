@@ -1,18 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="100dp"
-    android:layout_margin="12dp">
+    android:layout_margin="10dp"
+    app:cardCornerRadius="5dp"
+    app:cardElevation="2dp"
+    app:cardMaxElevation="5dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#555555">
 
         <TextView
             android:id="@+id/garden_name_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:textColor="#ffffff"
             android:textSize="20sp"
             tools:text="garden name" />
 
@@ -21,6 +28,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/garden_name_textview"
+            android:onClick="onToggleFlower"
+            android:paddingLeft="20dp"
+            android:textColor="#ffffff"
             android:textSize="20sp"
             tools:text="neighborhood" />
 
@@ -29,16 +39,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/neighborhood_textview"
+            android:paddingLeft="20dp"
+            android:textColor="#ffffff"
             android:textSize="20sp"
             tools:text="borough" />
 
-        <Button
+        <TextView
             android:id="@+id/add_to_faves_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:background="@drawable/ic_filter_vintage_black_24dp" />
+            android:background="@drawable/ic_filter_vintage_black_24dp"
+            android:paddingRight="20dp" />
 
     </RelativeLayout>
 
