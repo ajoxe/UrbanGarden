@@ -41,7 +41,11 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
     String spinnerOption;
     String searchQuery;
     String queryType;
+
     CheckBox favesCheckBox;
+
+
+    String zipEditTextString;
 
     GPSTracker gps;
     double latitude;
@@ -80,9 +84,13 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
         spinner.setOnItemSelectedListener(this);
     }
 
-    public void onSearchClick(View view) {
-        queryType = "postcode";
-        searchQuery = searchEditText.getText().toString();
+
+    public void onSearchClick(View view){
+        zipEditTextString = searchEditText.getText().toString();
+        if (!zipEditTextString.equals("")){
+            queryType = "postcode";
+            searchQuery = zipEditTextString;
+        }
         Log.d("search query", searchQuery);
 
         makeNetworkCall(searchQuery, queryType, new RetrofitListener() {
@@ -138,24 +146,9 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
                 case "Staten Island":
                     searchQuery = "R";
                     break;
-                default:
-                    searchQuery = "M";
-            }
-            makeNetworkCall(searchQuery, queryType, new RetrofitListener() {
-                @Override
-                public void updateUI(Garden[] gardens) {
-                    gardenList.addAll(Arrays.asList(gardens));
-                    recyclerView.setAdapter(new GardenAdapter(gardenList));
-                }
-
-                @Override
-                public void onFailureAlert() {
-                    alertUserAboutError();
-                }
-            });
-
             }
 
+            }
     }
 
 
