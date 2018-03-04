@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
@@ -24,6 +25,7 @@ import com.example.android.urbangarden.location.GPSTracker;
 
 import com.example.android.urbangarden.Networking.NetworkUtility;
 import com.example.android.urbangarden.Networking.RetrofitListener;
+import com.example.android.urbangarden.location.MapsActivity;
 import com.example.android.urbangarden.model.Garden;
 import com.example.android.urbangarden.userloginandregister.LoginActivity;
 import com.example.android.urbangarden.userloginandregister.MyPostsActivity;
@@ -41,6 +43,7 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
     String searchOption;
     String searchQuery;
     String queryType;
+    Button getUserLocationButton;
 
     GPSTracker gps;
     double latitude;
@@ -61,6 +64,8 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
         setContentView(R.layout.activity_garden_search);
         setSearchSpinner();
 
+        getUserLocationButton = (Button) findViewById(R.id.get_location_button);
+
         getLocation();
         recyclerView = findViewById(R.id.search_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,false));
@@ -70,9 +75,15 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
         Intent intent = getIntent();
         user = intent.getStringExtra("currentUser");
 
+        getUserLocationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(GardenSearchActivity.this, MapsActivity.class);
+//                intent.putExtra("currentUser", username.getText().toString());
+                startActivity(intent);
+            }
+        });
     }
-
-
 
     //sets up the spinner
     public void setSearchSpinner() {

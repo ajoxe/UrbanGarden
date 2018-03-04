@@ -21,8 +21,8 @@
             android:id="@+id/search_query_edit_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-           android:hint="@string/enter_search_query"
-            />
+           android:hint="@string/enter_search_query" />
+
         <Button
             android:id="@+id/post_search_button"
             android:layout_width="wrap_content"
@@ -38,11 +38,12 @@
             android:layout_width="125dp"
             android:layout_height="wrap_content" />
 
-       
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/search_by_location"/>
+        <Button
+            android:id="@+id/get_location_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="GET CURRENT LOCATION"
+            android:onClick="onSearchClick"/>
 
     </LinearLayout>
 
