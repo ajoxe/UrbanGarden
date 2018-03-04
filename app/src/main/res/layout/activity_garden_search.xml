@@ -19,7 +19,7 @@
         android:orientation="vertical">
         <Spinner
             android:id="@+id/boro_choices_spinner"
-            android:layout_width="125dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <TextView
             android:text="or"
@@ -30,12 +30,8 @@
             android:id="@+id/search_query_edit_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-<<<<<<< Updated upstream
             android:hint="@string/enter_search_query" />
-=======
-           android:hint="@string/enter_search_query"
-            />
->>>>>>> Stashed changes
+
 
         <Button
             android:id="@+id/post_search_button"
@@ -44,26 +40,10 @@
             android:onClick="onSearchClick"
             android:text="search" />
 
-<<<<<<< Updated upstream
-        android:hint="@string/enter_search_query" />
-
-
-        <Spinner
-            android:id="@+id/boro_choices_spinner"
-            android:layout_width="125dp"
-            android:layout_height="wrap_content" />
-
-
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/search_by_location" />
-=======
-        <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/search_by_location"/>
->>>>>>> Stashed changes
 
     </LinearLayout>
 
