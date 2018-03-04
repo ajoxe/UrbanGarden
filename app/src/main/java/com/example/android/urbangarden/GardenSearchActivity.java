@@ -1,5 +1,6 @@
 package com.example.android.urbangarden;
 
+import android.content.Context;
 import android.content.Intent;
 
 import android.content.SharedPreferences;
@@ -30,6 +31,8 @@ import android.widget.TextView;
 
 
 import com.example.android.urbangarden.controller.GardenAdapter;
+import com.example.android.urbangarden.database.GardensDataManager;
+import com.example.android.urbangarden.database.GardensDatabase;
 import com.example.android.urbangarden.location.GPSTracker;
 
 import com.example.android.urbangarden.Networking.NetworkUtility;
@@ -53,12 +56,14 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
     String spinnerOption;
     String searchQuery;
     String queryType;
-TextView searchToggle;
+    TextView searchToggle;
     CheckBox favesCheckBox;
     LinearLayout searchLayout;
+    Context context;
 
 
     String zipEditTextString;
+    String spinnerChoiceResult = "";
 
     GPSTracker gps;
     double latitude;
@@ -69,15 +74,18 @@ TextView searchToggle;
 
     private RecyclerView recyclerView;
     List<Garden> gardenList = new ArrayList<>();
+    GardenAdapter gardenAdapter;
 
     private final String TAG = getClass().getSimpleName();
     private Menu menu;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_garden_search);
 //        changeActionBarColor();
+        context = getApplicationContext();
         setSearchSpinner();
         searchToggle = (TextView) findViewById(R.id.search_toggle_text_view);
         searchToggle.setOnClickListener(new View.OnClickListener() {
@@ -90,9 +98,9 @@ TextView searchToggle;
         searchLayout = (LinearLayout) findViewById(R.id.search_layout);
         getLocation();
         recyclerView = findViewById(R.id.search_recycler_view);
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,false));
-
+        gardenAdapter = new GardenAdapter(gardenList, context);
+        recyclerView.setAdapter(gardenAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
         searchEditText = (EditText) findViewById(R.id.search_query_edit_text);
 
         Intent intent = getIntent();
@@ -113,23 +121,33 @@ TextView searchToggle;
     }
 
 
-    public void onSearchClick(View view){
+    public void onSearchClick(View view) {
         searchLayout.setVisibility(View.GONE);
         searchToggle.setVisibility(View.VISIBLE);
         zipEditTextString = searchEditText.getText().toString();
-        if (!zipEditTextString.equals("")){
+        if (!zipEditTextString.equals("")) {
             queryType = "postcode";
             searchQuery = zipEditTextString;
+        } else if (!spinnerChoiceResult.equals("")){
+            queryType = "boro";
+            searchQuery = spinnerChoiceResult;
+        } else{
+            //TODO location logic for queries and parameters
         }
-        Log.d("search query", searchQuery);
 
+        Log.d(TAG, "SEARCH QUERY = " + searchQuery);
+        Log.d(TAG, "QUERY TYPE = " + queryType);
         makeNetworkCall(searchQuery, queryType, new RetrofitListener() {
             @Override
             public void updateUI(Garden[] gardens) {
                 Log.d("update UI", String.valueOf(gardens.length));
                 //TODO add data to Recycler view
+                if(gardenList.size() != 0){
+                    gardenList.clear();
+                }
                 gardenList.addAll(Arrays.asList(gardens));
-                recyclerView.setAdapter(new GardenAdapter(gardenList));
+                gardenAdapter.notifyDataSetChanged();
+                GardensDataManager.populateDBWithList(gardenList, GardensDatabase.getGardensDatabase(context));
             }
 
             @Override
@@ -158,27 +176,26 @@ TextView searchToggle;
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         spinnerOption = (String) parent.getItemAtPosition(position);
-        if (!spinnerOption.equals("Search by borough")){
-            queryType = "boro";
-            switch(spinnerOption) {
+        if (!spinnerOption.equals("Search by borough")) {
+            switch (spinnerOption) {
                 case "Brooklyn":
-                    searchQuery = "B";
+                    spinnerChoiceResult = "B";
                     break;
                 case "Manhattan":
-                    searchQuery = "M";
+                    spinnerChoiceResult = "M";
                     break;
                 case "Bronx":
-                    searchQuery = "X";
+                    spinnerChoiceResult = "X";
                     break;
                 case "Queens":
-                    searchQuery = "Q";
+                    spinnerChoiceResult = "Q";
                     break;
                 case "Staten Island":
-                    searchQuery = "R";
+                    spinnerChoiceResult = "R";
                     break;
             }
 
-            }
+        }
     }
 
 
@@ -198,18 +215,16 @@ TextView searchToggle;
         return true;
     }
 
-    private void hideOption(String user)
-    {
+    private void hideOption(String user) {
         MenuItem item = menu.findItem(R.id.login);
-        if(user != null) {
+        if (user != null) {
             item.setVisible(false);
         }
     }
 
-    private void showOption(String user)
-    {
+    private void showOption(String user) {
         MenuItem item = menu.findItem(R.id.login);
-        if(user == null) {
+        if (user == null) {
             item.setVisible(true);
         }
     }
@@ -228,9 +243,9 @@ TextView searchToggle;
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.login:
-                    Intent intent = new Intent(GardenSearchActivity.this, LoginActivity.class);
+                Intent intent = new Intent(GardenSearchActivity.this, LoginActivity.class);
 //                intent.putExtra("myGardenList", "");
-                    startActivity(intent);
+                startActivity(intent);
                 Log.e(TAG, "login button was clicked");
                 break;
 
@@ -249,6 +264,7 @@ TextView searchToggle;
                 break;
 
             case R.id.fav_list:
+                GardensDataManager.getSavedGardens(GardensDatabase.getGardensDatabase(getApplicationContext()));
                 Intent intent2 = new Intent(GardenSearchActivity.this, MyGardensActivity.class);
 //                intent.putExtra("myGardenList", "");
                 startActivity(intent2);
@@ -276,7 +292,7 @@ TextView searchToggle;
         return true;
     }
 
-    public void locationClick(View view){
+    public void locationClick(View view) {
 
     }
 
@@ -294,7 +310,7 @@ TextView searchToggle;
             gps.showSettingsAlert();
         }
     }
-    
+
 //    public void changeActionBarColor(){
 //        android.app.ActionBar actionBar = getActionBar();
 //        actionBar.setBackgroundDrawable(new ColorDrawable(Color.GREEN));

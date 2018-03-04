@@ -19,6 +19,9 @@ public interface GardensDao {
     @Query("SELECT * FROM gardens")
     List<Garden> getAll();
 
+    @Query("UPDATE gardens SET status = 'saved' WHERE propid = :id")
+    void saveGarden(String id);
+
     @Insert(onConflict = REPLACE)
     void insertGarden(Garden garden);
 

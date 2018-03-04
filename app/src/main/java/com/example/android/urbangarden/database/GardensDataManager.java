@@ -1,6 +1,7 @@
 package com.example.android.urbangarden.database;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.example.android.urbangarden.model.Garden;
 
@@ -16,34 +17,67 @@ public class GardensDataManager {
     //get a list of saved
     //update saved
     //delete
-    public void populateDBWithList(final List<Garden> gardenList, final GardensDatabase db){
+    private static String TAG = GardensDataManager.class.getSimpleName();
+  public static List<Garden> savedGardenList = new ArrayList<>();
+    public static void populateDBWithList(final List<Garden> gardenList, final GardensDatabase db){
+    new GardensDBTasks(new DatabaseTaskListener() {
+        @Override
+        public void backgroundTask() {
+            db.gardensDao().insertAllGardens(gardenList);
+            Log.d(TAG, "pop method: insert gardens - list size" + gardenList.size());
+            int count = db.gardensDao().countGardens();
+            Log.d(TAG, "pop method: gardens count" + count);
+        }
+
+        @Override
+        public void taskPostExecute() {
+
+        }
+    }).execute();
+    }
+
+    public static List<Garden> getSavedGardens(final GardensDatabase db){
+
         new GardensDBTasks(new DatabaseTaskListener() {
             @Override
             public void backgroundTask() {
-                db.gardensDao().insertAllGardens(gardenList);
+               savedGardenList.addAll(db.gardensDao().getSaved());
+               Log.d(TAG, "saved size: " + savedGardenList.size());
+            }
+            @Override
+            public void taskPostExecute() {
+                db.close();
+            }
+        }).execute();
+        return savedGardenList;
+    }
+
+    public static void addGarden(final Garden garden, final GardensDatabase db){
+        new GardensDBTasks(new DatabaseTaskListener() {
+            @Override
+            public void backgroundTask() {
+                db.gardensDao().insertGarden(garden);
             }
 
             @Override
             public void taskPostExecute() {
-
+                db.close();
             }
         }).execute();
     }
 
-    public List<Garden> getSavedGardens(final GardensDatabase db){
-        final List<Garden> savedGardens = new ArrayList<>();
+    public static void updateGardenToSaved(final String id, final GardensDatabase db){
         new GardensDBTasks(new DatabaseTaskListener() {
             @Override
             public void backgroundTask() {
-               savedGardens.addAll(db.gardensDao().getSaved());
+                db.gardensDao().saveGarden(id);
+                Log.d(TAG, "SAVED GARDEN MANAGER : GARDEN SAVED");
             }
 
             @Override
             public void taskPostExecute() {
-
             }
         }).execute();
-        return savedGardens;
     }
 
 
@@ -53,7 +87,7 @@ public class GardensDataManager {
         void taskPostExecute();
     }
 
-    public class GardensDBTasks extends AsyncTask<Void, Void, Void>{
+    public static class GardensDBTasks extends AsyncTask<Void, Void, Void>{
         DatabaseTaskListener taskListener;
 
         public GardensDBTasks(DatabaseTaskListener listener){

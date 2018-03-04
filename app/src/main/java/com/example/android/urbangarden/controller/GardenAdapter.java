@@ -1,5 +1,6 @@
 package com.example.android.urbangarden.controller;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,9 +20,11 @@ import java.util.List;
 public class GardenAdapter extends RecyclerView.Adapter<GardenViewHolder> {
 
     List<Garden> gardenDataList = new ArrayList<>();
+    Context context;
 
-    public GardenAdapter(List<Garden> gardenDataList) {
+    public GardenAdapter(List<Garden> gardenDataList, Context context) {
         this.gardenDataList = gardenDataList;
+        this.context = context;
     }
 
     @Override
@@ -32,7 +35,7 @@ public class GardenAdapter extends RecyclerView.Adapter<GardenViewHolder> {
 
     @Override
     public void onBindViewHolder(GardenViewHolder holder, int position) {
-        holder.bind(gardenDataList.get(position));
+        holder.bind(gardenDataList.get(position), context);
 
     }
 
