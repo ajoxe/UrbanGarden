@@ -136,7 +136,7 @@
         android:id="@+id/map_button"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:text="See Map"
+        android:text="Map"
         android:drawableRight="@android:drawable/ic_dialog_map"
         android:drawableTint="@color/colorBrown"
         android:background="@color/colorPrimaryTTT"
