@@ -67,12 +67,15 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
     Context context;
     TextView textBanner;
     Button zipButton;
+    Button mapButton;
 
     String spinnerOption;
     String searchQuery;
     String queryType;
     String zipEditTextString;
     String spinnerChoiceResult = "";
+    String[] addressArray;
+    String[] nameArray;
 
     GPSTracker gps;
     double latitude;
@@ -111,6 +114,7 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
         recyclerView.setAdapter(gardenAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
         searchEditText = (EditText) findViewById(R.id.search_query_edit_text);
+        mapButton = (Button) findViewById(R.id.map_button);
 
 
 
@@ -145,7 +149,12 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
             }
         });
     }
-
+    public void seeMapClick(View view){
+        Intent intent = new Intent(GardenSearchActivity.this, MapsActivity.class);
+        intent.putExtra("GardenAddressList", addressArray);
+        intent.putExtra("GardenNameList", nameArray);
+        startActivity(intent);
+    }
     public void onZipClick(View view){
         zipButton.setBackgroundColor(Color.parseColor("#90d0ab"));
         zipButton.setTextColor(Color.parseColor("#ffffff"));
@@ -198,6 +207,15 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
                 gardenList.addAll(Arrays.asList(gardens));
                 gardenAdapter.notifyDataSetChanged();
                 GardensDataManager.populateDBWithList(gardenList, GardensDatabase.getGardensDatabase(context));
+                addressArray = new String[gardenList.size()];
+                for (int i = 0; i< gardenList.size(); i++){
+                    addressArray[i] = gardenList.get(i).getAddress() + "New York, NY";
+                }
+                nameArray = new String[gardenList.size()];
+                for (int i = 0; i< gardenList.size(); i++){
+                    nameArray[i] = gardenList.get(i).getGarden_name();
+                }
+                mapButton.setVisibility(View.VISIBLE);
             }
 
             @Override
@@ -407,6 +425,8 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
                 zipButton.setTextColor(Color.parseColor("#90d0ab"));
                 searchEditText.setVisibility(View.GONE);
                 spinner.setVisibility(View.VISIBLE);
+                mapButton.setVisibility(View.GONE);
+
             }
         });
 

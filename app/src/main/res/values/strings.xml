@@ -12,5 +12,6 @@
     <string name="error_message2">Error. Network not available.</string>
     <string name="Ok_message">OK</string>
     <string name="search_option_toggle">search</string>
+    <string name="title_activity_garden_maps">GardenMap</string>
 
 </resources>

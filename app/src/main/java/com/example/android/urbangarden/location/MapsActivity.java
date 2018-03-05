@@ -16,6 +16,7 @@ import android.util.Log;
 import com.example.android.urbangarden.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -29,6 +30,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 
 import java.io.IOException;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -38,6 +40,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private FusedLocationProviderClient mFusedLocationClient;
     private String name;
     private String address;
+    private String[] addressArray;
+    private String[] namesArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +58,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Intent intent = getIntent();
         name = intent.getStringExtra("GardenName");
         address = intent.getStringExtra("GardenAddress");
+        try{
+            addressArray = intent.getStringArrayExtra("GardenAddressList");
+            Log.d("address array", "size" + addressArray.length);
+            namesArray = intent.getStringArrayExtra("GardenNameList");
+        } catch (NullPointerException e){
+            e.printStackTrace();
+        }
 
     }
 
@@ -72,6 +83,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
+
+        UiSettings uiSettings = mMap.getUiSettings();
+        uiSettings.setZoomControlsEnabled(true);
+        uiSettings.setMyLocationButtonEnabled(true);
+
         Log.d("MapActivity", "onMapReady: This loads");
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ||
                 ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -88,14 +104,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                                 double lat = location.getLatitude();
                                 double lng = location.getLongitude();
-                                mMap.addMarker(new MarkerOptions().position(new LatLng(lat, lng)).title("Current Location").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher_round)));
+                                mMap.addMarker(new MarkerOptions().position(new LatLng(lat, lng)).title("Current Location"));
                             }
                         }
                     });
         }
-        UiSettings uiSettings = mMap.getUiSettings();
-        uiSettings.setZoomControlsEnabled(true);
-        uiSettings.setMyLocationButtonEnabled(true);
+
 
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ||
                 ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -115,7 +129,62 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 if (address1 != null) {
                     Address location = address1.get(0);
                     p1 = new LatLng(location.getLatitude(), location.getLongitude());
-                    mMap.addMarker(new MarkerOptions().position(p1).title(name).icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher_round)));
+                    mMap.addMarker(new MarkerOptions().position(p1).title(name).icon(BitmapDescriptorFactory.fromResource(R.drawable.mapmarker)));
+
+                    //mMap.animateCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition(p1, 0,0,0)));
+                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(p1, 13));
+
+                    CameraPosition cameraPosition = new CameraPosition.Builder()
+                            .target(new LatLng(location.getLatitude(), location.getLongitude()))      // Sets the center of the map to location user
+                            .zoom(17)                   // Sets the zoom
+                            .bearing(90)                // Sets the orientation of the camera to east
+                            .tilt(40)                   // Sets the tilt of the camera to 30 degrees
+                            .build();                   // Creates a CameraPosition from the builder
+                    mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+                }
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+
+
+
+        if (addressArray != null) {
+            List <Address> addressList = new ArrayList<>();
+            List <Address> addressCoder;
+            String[] tenAddress = new String[10];
+            LatLng p2;
+            for (int i = 0; i< 10; i++){
+                tenAddress[i] = addressArray[i];
+            }
+            try {
+                // May throw an IOException
+                for (String addressString : tenAddress){
+                    addressCoder = coder.getFromLocationName(addressString, 5);
+                    Log.d("addressString", "string" + addressString);
+                    Log.d("addressCoder", "size " + addressCoder.size());
+                    addressList.add(addressCoder.get(0));
+                }
+                if (addressList != null) {
+                    for (int i=0; i<addressList.size(); i++){
+                        Address locationL = addressList.get(i);
+                        p2 = new LatLng(locationL.getLatitude(), locationL.getLongitude());
+                        mMap.addMarker(new MarkerOptions().position(p2).title(namesArray[i]).icon(BitmapDescriptorFactory.fromResource(R.drawable.mapmarker)));
+                    }
+                    Address locationL = addressList.get(0);
+                    p2 = new LatLng(locationL.getLatitude(), locationL.getLongitude());
+                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(p2, 13));
+
+
+                    /*mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(p1, 13));
+
+                    CameraPosition cameraPosition = new CameraPosition.Builder()
+                            .target(new LatLng(location.getLatitude(), location.getLongitude()))      // Sets the center of the map to location user
+                            .zoom(17)                   // Sets the zoom
+                            .bearing(90)                // Sets the orientation of the camera to east
+                            .tilt(40)                   // Sets the tilt of the camera to 30 degrees
+                            .build();                   // Creates a CameraPosition from the builder
+                    mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));*/
                 }
             } catch (IOException ex) {
                 ex.printStackTrace();
@@ -123,7 +192,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
 //        1. auto zoom and auto center
-        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        /*LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         Criteria criteria = new Criteria();
 
         Location location = locationManager.getLastKnownLocation(locationManager.getBestProvider(criteria, false));
@@ -138,7 +207,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     .tilt(40)                   // Sets the tilt of the camera to 30 degrees
                     .build();                   // Creates a CameraPosition from the builder
             mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-        }
+        }*/
     }
 
 }

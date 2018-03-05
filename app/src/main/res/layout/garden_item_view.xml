@@ -56,7 +56,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/garden_name_textview"
-                android:onClick="onToggleFlower"
                 android:textColor="@color/colorAccent"
                 android:gravity="center"
                 android:layout_gravity="center"
