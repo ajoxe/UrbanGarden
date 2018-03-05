@@ -17,37 +17,54 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="20dp"
-            android:background="@color/colorBrown" />
+            android:background="@color/colorBrown"/>
 
         <ImageView
             android:id="@+id/gardenImage"
-            android:layout_width="145dp"
-            android:layout_height="200dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@drawable/garden" />
+            android:src="@drawable/garden"
+            android:scaleType="centerCrop"/>
 
         <TextView
             android:id="@+id/gardenName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:text="Sample Name"
-            android:textSize="22dp" />
+            android:textSize="18sp"
+            android:textColor="@color/colorBrown"
+            android:paddingHorizontal="@dimen/layout_padding"
+            android:paddingVertical="4dp"
+            android:layout_marginTop="8dp"
+            android:letterSpacing=".02"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+            android:gravity="center"
+            />
 
         <TextView
             android:id="@+id/gardenAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:text="Address of Garden to be put here"
-            android:textSize="20dp" />
+            android:textSize="14dp"
+            android:paddingHorizontal="@dimen/layout_padding"
+            android:layout_marginBottom="16dp"
+            android:gravity="center"
+            />
 
         <Button
             android:id="@+id/mapButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Find on Map" />
+            android:text="Map"
+            android:background="@drawable/roundedshapebrown"
+            android:padding="8dp"
+            android:drawableEnd="@android:drawable/ic_dialog_map"
+            android:drawableTint="@color/colorBrown"
+            android:textColor="@color/colorBrown"
+            android:layout_marginBottom="@dimen/layout_padding"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -59,8 +76,8 @@
 
         <Button
             android:id="@+id/favoriteButtonImg"
-            android:layout_width="40sp"
-            android:layout_height="40sp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_gravity="center"
             android:background="@drawable/ic_filter_vintage_black_24dp" />
 
@@ -69,7 +86,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-
             android:text="Add to Favorites" />
 
 

@@ -49,7 +49,7 @@ public class GardenDetailActivity extends AppCompatActivity {
         //        String getName =intent.getStringExtra("name");
         //      Log.d("PARKNAME", getName);
 //            parkName.setText(getName);
-        String getName = intent.getStringExtra("name");
+        final String getName = intent.getStringExtra("name");
 
         parkName = findViewById(R.id.gardenName);
         parkAddress = findViewById(R.id.gardenAddress);
@@ -69,13 +69,6 @@ public class GardenDetailActivity extends AppCompatActivity {
             }
         });
 
-
-        Intent intent1 = getIntent();
-//        Bundle b = intent.getExtras();
-        //        String getName =intent.getStringExtra("name");
-        //      Log.d("PARKNAME", getName);
-//            parkName.setText(getName);
-        final String getName1 = intent1.getStringExtra("name");
 
         parkName.setText(getName1);
 
