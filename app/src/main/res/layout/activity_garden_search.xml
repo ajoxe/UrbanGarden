@@ -19,25 +19,26 @@
         android:padding="@dimen/layout_padding"
         android:background="#2b1d0e">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+
 
             <Spinner
                 android:id="@+id/boro_choices_spinner"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_gravity="center"
                 android:layout_weight="1"
                 />
 
             <EditText
                 android:id="@+id/search_query_edit_text"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_weight=".75"
                 android:layout_height="wrap_content"
                 android:hint="@string/enter_search_query"
                 android:inputType="number"
+                android:gravity="center"
+                android:layout_gravity="center"
                 android:ellipsize="end"
                 android:textSize="14sp"
                 android:maxLines="1"
@@ -48,7 +49,7 @@
                 android:textColorHint="@color/colorPrimaryT"
                 />
 
-        </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -87,7 +88,7 @@
                 android:onClick="onSearchClick"
                 android:layout_gravity="end"
                 android:text="search"
-                android:textColor="#ffffff"
+                android:textColor="@color/colorBrown"
                 android:backgroundTint="#90d0ab"
                 android:textSize="10sp"
                 android:background="@drawable/roundedshape"/>
@@ -120,17 +121,20 @@
             android:id="@+id/search_toggle_text_view"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:layout_gravity="end"
-            android:drawableRight="@android:drawable/ic_menu_more"
-            android:drawableTint="@color/colorPrimaryDark"
+            android:drawableRight="@android:drawable/arrow_down_float"
+            android:drawableTint="@color/colorPrimary"
+            android:drawingCacheQuality="high"
+            android:ellipsize="end"
+            android:visibility="gone"
             android:text="Search"
-            android:textSize="16sp"
+            android:textSize="12sp"
             android:gravity="center_vertical"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium.Inverse"
             android:textColor="@color/colorPrimary"
             android:paddingLeft="@dimen/layout_padding"
-            android:visibility="gone"
+
             />
 
     </LinearLayout>

@@ -103,83 +103,15 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_garden_search);
-//        changeActionBarColor();
         context = getApplicationContext();
-        setSearchSpinner();
-        setupUI(findViewById(R.id.parent));
-
-        getUserLocationButton = (Button) findViewById(R.id.get_location_button);
-        searchToggle = (TextView) findViewById(R.id.search_toggle_text_view);
-        searchLayout = (LinearLayout) findViewById(R.id.search_layout);
-        textBanner = (TextView) findViewById(R.id.gardens_banner_text_view);
-        zipButton = (Button) findViewById(R.id.zip_button);
-
-
-        setToggleClick();
-        getLocation();
-        recyclerView = findViewById(R.id.search_recycler_view);
-        gardenAdapter = new GardenAdapter(gardenList, context);
-        recyclerView.setAdapter(gardenAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
-        searchEditText = (EditText) findViewById(R.id.search_query_edit_text);
-        mapButton = (Button) findViewById(R.id.map_button);
-        logoBackground = (ImageView) findViewById(R.id.logo_back_image);
-
-
-        searchEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                boolean handled = false;
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    onSearchClick(v);
-                    hideSoftKeyboard(GardenSearchActivity.this);
-                    handled = true;
-                }
-                return handled;
-            }
-        });
-
-
         getSupportActionBar().setBackgroundDrawable(getDrawable(R.drawable.applbarleaves));
 
-        Intent intent = getIntent();
-        user = intent.getStringExtra("currentUser");
-
-        getUserLocationButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(GardenSearchActivity.this, MapsActivity.class);
-                intent.putExtra("Latitude", latitude);
-                intent.putExtra("Longtitude", longitude);
-                startActivity(intent);
-            }
-        });
+        setupUI(findViewById(R.id.parent));
+        setUpViews();
+        userLoginLogic();
+        locationLogic();
     }
 
-    public void seeMapClick(View view) {
-        Intent intent = new Intent(GardenSearchActivity.this, MapsActivity.class);
-        intent.putExtra("GardenAddressList", addressArray);
-        intent.putExtra("GardenNameList", nameArray);
-        startActivity(intent);
-    }
-
-    public void onZipClick(View view) {
-        zipButton.setBackgroundColor(Color.parseColor("#90d0ab"));
-        zipButton.setTextColor(Color.parseColor("#ffffff"));
-        searchEditText.setVisibility(View.VISIBLE);
-        spinner.setVisibility(View.GONE);
-    }
-
-    //sets up the spinner
-    public void setSearchSpinner() {
-        spinner = (Spinner) findViewById(R.id.boro_choices_spinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.boro_spinner_options, android.R.layout.simple_spinner_item);
-
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(this);
-    }
 
 
     public void onSearchClick(View view) {
@@ -192,16 +124,16 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
         if (!zipEditTextString.equals("")) {
             queryType = "postcode";
             searchQuery = zipEditTextString;
-            textBanner.setText("Community Gardens in " + zipEditTextString);
+            textBanner.setText("Gardens near" + zipEditTextString);
             textBanner.setVisibility(View.VISIBLE);
 
         } else if (!spinnerChoiceResult.equals("")) {
             queryType = "boro";
             searchQuery = spinnerChoiceResult;
-            textBanner.setText(spinnerOption + " Community Gardens");
+            textBanner.setText(spinnerOption + " Gardens");
             textBanner.setVisibility(View.VISIBLE);
         } else {
-            //TODO location logic for queries and parameters
+            //TODO location logic for queries and parameters, lol AJ has no time for that
         }
 
         Log.d(TAG, "SEARCH QUERY = " + searchQuery);
@@ -227,13 +159,11 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
 
             @Override
             public void onFailureAlert() {
-
                 alertUserAboutError();
                 loadDummyData();
                 loadMapData();
             }
         });
-
     }
 
     public void loadDummyData() {
@@ -251,33 +181,26 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
             nameArray[i] = gardenList.get(i).getGarden_name();
         }
         mapButton.setVisibility(View.VISIBLE);
-
     }
 
-    public void makeCallWithZip(String zip, String type) {
 
-        makeNetworkCall(zip, type, new RetrofitListener() {
-            @Override
-            public void updateUI(Garden[] gardens) {
-                Log.d("update UI", String.valueOf(gardens.length));
-                if (gardenList.size() != 0) {
-                    gardenList.clear();
-                }
-                gardenList.addAll(Arrays.asList(gardens));
-                gardenAdapter.notifyDataSetChanged();
-                GardensDataManager.populateDBWithList(gardenList, GardensDatabase.getGardensDatabase(context));
-            }
 
+    public void locationLogic(){
+        getLocation();
+        getUserLocationButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onFailureAlert() {
-                alertUserAboutError();
+            public void onClick(View view) {
+                Intent intent = new Intent(GardenSearchActivity.this, MapsActivity.class);
+                intent.putExtra("Latitude", latitude);
+                intent.putExtra("Longtitude", longitude);
+                startActivity(intent);
             }
         });
-
     }
 
-    public void makeCallWithBoro(String searchQuery, String queryType) {
-
+    public void userLoginLogic(){
+        Intent intent = getIntent();
+        user = intent.getStringExtra("currentUser");
     }
 
     public void makeNetworkCall(String searchQuery, String queryType, RetrofitListener listener) {
@@ -289,46 +212,11 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
     private void alertUserAboutError() {
         AlertDialogFragment alertDialogFragment = new AlertDialogFragment();
         alertDialogFragment.show(getFragmentManager(), "error_dialog");
-
-    }
-
-    //spinner selection on click
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        if (((TextView) parent.getChildAt(0)) != null) {
-            ((TextView) parent.getChildAt(0)).setTextColor(Color.parseColor("#90d0ab"));
-            ((TextView) parent.getChildAt(0)).setTextSize(14);
-        }
-
-        spinnerOption = (String) parent.getItemAtPosition(position);
-        if (!spinnerOption.equals("Search by borough")) {
-            switch (spinnerOption) {
-                case "Brooklyn":
-                    spinnerChoiceResult = "B";
-                    break;
-                case "Manhattan":
-                    spinnerChoiceResult = "M";
-                    break;
-                case "Bronx":
-                    spinnerChoiceResult = "X";
-                    break;
-                case "Queens":
-                    spinnerChoiceResult = "Q";
-                    break;
-                case "Staten Island":
-                    spinnerChoiceResult = "R";
-                    break;
-            }
-
-        }
     }
 
 
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-        // Another interface callback
-    }
 
+    //menu logic
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         this.menu = menu;
@@ -419,10 +307,6 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
         return true;
     }
 
-    public void locationClick(View view) {
-
-    }
-
 
     private void getLocation() {
         gps = new GPSTracker(GardenSearchActivity.this);
@@ -437,6 +321,8 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
             gps.showSettingsAlert();
         }
     }
+
+    //UI logic
 
     public void setToggleClick() {
         searchToggle.setOnClickListener(new View.OnClickListener() {
@@ -496,6 +382,105 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
                 setupUI(innerView);
             }
         }
+    }
+
+    public void setUpViews(){
+        getUserLocationButton = (Button) findViewById(R.id.get_location_button);
+        searchToggle = (TextView) findViewById(R.id.search_toggle_text_view);
+        searchLayout = (LinearLayout) findViewById(R.id.search_layout);
+        textBanner = (TextView) findViewById(R.id.gardens_banner_text_view);
+        zipButton = (Button) findViewById(R.id.zip_button);
+        mapButton = (Button) findViewById(R.id.map_button);
+        logoBackground = (ImageView) findViewById(R.id.logo_back_image);
+        setSearchEditText();
+        setSearchSpinner();
+        setRecyclerView();
+        setToggleClick();
+
+    }
+    public void setSearchEditText(){
+        searchEditText = (EditText) findViewById(R.id.search_query_edit_text);
+        searchEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                boolean handled = false;
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    onSearchClick(v);
+                    hideSoftKeyboard(GardenSearchActivity.this);
+                    handled = true;
+                }
+                return handled;
+            }
+        });
+
+    }
+
+    public void setRecyclerView(){
+        recyclerView = findViewById(R.id.search_recycler_view);
+        gardenAdapter = new GardenAdapter(gardenList, context);
+        recyclerView.setAdapter(gardenAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
+    }
+    //opens a map with some gardens from the list
+    public void seeMapClick(View view) {
+        Intent intent = new Intent(GardenSearchActivity.this, MapsActivity.class);
+        intent.putExtra("GardenAddressList", addressArray);
+        intent.putExtra("GardenNameList", nameArray);
+        startActivity(intent);
+    }
+    //zip code search method
+    public void onZipClick(View view) {
+        zipButton.setBackgroundColor(Color.parseColor("#90d0ab"));
+        zipButton.setTextColor(Color.parseColor("#ffffff"));
+        searchEditText.setVisibility(View.VISIBLE);
+        spinner.setVisibility(View.GONE);
+    }
+
+    //sets up the spinner
+    public void setSearchSpinner() {
+        spinner = (Spinner) findViewById(R.id.boro_choices_spinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.boro_spinner_options, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(this);
+    }
+
+    //spinner selection on click
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        if (((TextView) parent.getChildAt(0)) != null) {
+            ((TextView) parent.getChildAt(0)).setTextColor(Color.parseColor("#90d0ab"));
+            ((TextView) parent.getChildAt(0)).setTextSize(14);
+        }
+
+        spinnerOption = (String) parent.getItemAtPosition(position);
+        if (!spinnerOption.equals("Search by borough")) {
+            switch (spinnerOption) {
+                case "Brooklyn":
+                    spinnerChoiceResult = "B";
+                    break;
+                case "Manhattan":
+                    spinnerChoiceResult = "M";
+                    break;
+                case "Bronx":
+                    spinnerChoiceResult = "X";
+                    break;
+                case "Queens":
+                    spinnerChoiceResult = "Q";
+                    break;
+                case "Staten Island":
+                    spinnerChoiceResult = "R";
+                    break;
+            }
+
+        }
+    }
+
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+        // Another interface callback
     }
 
 
