@@ -14,23 +14,25 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:orientation="vertical"
         android:background="@color/colorPrimaryT"
+
         >
         <TextView
             android:id="@+id/garden_name_textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#effcf4"
+            android:textColor="@color/colorBrown"
             android:textSize="16sp"
             tools:text="garden name"
             android:paddingHorizontal="@dimen/layout_padding"
-            android:paddingVertical="4dp"
+            android:paddingTop="16dp"
             android:layout_alignParentTop="true"
             android:letterSpacing=".05"
-            android:layout_marginBottom="4dp"
-            android:background="@color/colorBrown"/>
+            android:background="@drawable/roundedshapebrown"
+            android:backgroundTint="#f1afdcc1"
+            android:drawableBottom="@drawable/roundedshapebrownsolid"
+            android:drawablePadding="4dp"/>
 
 
         <LinearLayout

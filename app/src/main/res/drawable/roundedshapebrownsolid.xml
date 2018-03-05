@@ -3,8 +3,9 @@
     android:shape="rectangle">
     <!-- you can use any color you want I used here gray color-->
     <stroke android:color="@color/colorBrown"
-        android:width="2dp"/>
-    <size android:width="20dp"
-        android:height="20dp"/>
-
+        android:width="4dp"/>
+    <solid android:color="@color/colorBrown"/>
+    <size android:width="500dp"
+        android:height="5dp"/>
+    <corners android:radius="2dp"/>
 </shape>
