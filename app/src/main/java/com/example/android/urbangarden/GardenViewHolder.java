@@ -40,7 +40,12 @@ public class GardenViewHolder extends RecyclerView.ViewHolder {
 
     public void bind(final Garden gardenData, final Context context) {
         gardenName.setText(gardenData.getGarden_name());
-        neighborhood.setText(gardenData.getNeighborhoodname());
+        if (gardenData.getNeighborhoodname()!= null){
+            neighborhood.setText(gardenData.getNeighborhoodname());
+        } else {
+            neighborhood.setVisibility(View.GONE);
+        }
+
 
         borough.setText(convertBoro(gardenData.getBoro()));
 
