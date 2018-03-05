@@ -7,7 +7,7 @@
 
         <bitmap
             android:gravity="center"
-            android:src="@drawable/leafbackgroundcopy"/>
+            android:src="@drawable/fullleaves"/>
     </item>
 
 </layer-list>

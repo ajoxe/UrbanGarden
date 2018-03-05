@@ -11,9 +11,10 @@
         <item name="actionBarStyle">@style/Widget.Styled.ActionBar</item>
         <item name="actionMenuTextColor">@color/colorPrimary</item>
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="android:textColorPrimary">?attr/colorPrimaryDark</item>
+        <item name="android:textColorPrimary">@color/colorLigthBrown</item>
         <item name="android:colorForeground">@color/colorPrimary</item>
-        <item name="android:statusBarColor">@color/colorPrimaryDark</item>
+
+        <item name="android:statusBarColor">@color/colorPrimary</item>
 
     </style>
 
@@ -25,8 +26,9 @@
     </style>
 
     <style name="ActionBarTitleText" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
-
         <item name="android:textSize">16sp</item>
+        <item name="android:letterSpacing">.1</item>
+        <item name="android:textAllCaps">true</item>
     </style>
 
     <style name="ActionBarSubTitleText" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Subtitle">
