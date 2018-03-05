@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -23,6 +24,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -99,6 +101,7 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
         searchToggle = (TextView) findViewById(R.id.search_toggle_text_view);
         searchLayout = (LinearLayout) findViewById(R.id.search_layout);
         textBanner = (TextView) findViewById(R.id.gardens_banner_text_view);
+
         setToggleClick();
         getLocation();
         recyclerView = findViewById(R.id.search_recycler_view);
@@ -106,6 +109,23 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
         recyclerView.setAdapter(gardenAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
         searchEditText = (EditText) findViewById(R.id.search_query_edit_text);
+        searchEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                boolean handled = false;
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    onSearchClick(v);
+                    handled = true;
+                }
+                return handled;
+            }
+        });
+
+
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.drawable.smalllogo);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setTitle(" Urban Gardens");
 
         Intent intent = getIntent();
         user = intent.getStringExtra("currentUser");
@@ -147,7 +167,7 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
         } else if (!spinnerChoiceResult.equals("")){
             queryType = "boro";
             searchQuery = spinnerChoiceResult;
-            textBanner.setText(spinnerOption + "Community Gardens");
+            textBanner.setText(spinnerOption + " Community Gardens");
             textBanner.setVisibility(View.VISIBLE);
         } else{
             //TODO location logic for queries and parameters
@@ -219,6 +239,11 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
     //spinner selection on click
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        if (((TextView) parent.getChildAt(0))!= null){
+            ((TextView) parent.getChildAt(0)).setTextColor(Color.parseColor("#90d0ab"));
+            ((TextView) parent.getChildAt(0)).setTextSize(14);
+        }
+
         spinnerOption = (String) parent.getItemAtPosition(position);
         if (!spinnerOption.equals("Search by borough")) {
             switch (spinnerOption) {
