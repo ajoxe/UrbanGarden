@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">UrbanGarden</string>
+    <string name="app_name">Urban Garden</string>
     <string name="enter_search_query">or enter zipcode</string>
     <string name="search_by_location">Use my location instead</string>
 

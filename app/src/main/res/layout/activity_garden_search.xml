@@ -18,7 +18,7 @@
         android:layout_marginBottom="@dimen/layout_padding"
         android:orientation="vertical"
         android:padding="@dimen/layout_padding"
-        android:background="@color/colorPrimaryDark">
+        android:background="#ffffff">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -29,7 +29,8 @@
                 android:id="@+id/boro_choices_spinner"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1.5" />
+                android:layout_weight="1"
+                />
 
             <EditText
                 android:id="@+id/search_query_edit_text"
@@ -38,9 +39,11 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/enter_search_query"
                 android:inputType="number"
+                android:textSize="14sp"
                 android:maxLines="1"
                 android:maxLength="5"
                 android:imeOptions="actionDone"
+                android:textColor="#90d0ab"
                 />
 
         </LinearLayout>
@@ -48,23 +51,30 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:gravity="end">
 
             <Button
                 android:id="@+id/get_location_button"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="18dp"
                 android:onClick="onSearchClick"
-                android:text="GET CURRENT LOCATION" />
+                android:text="get location"
+                android:textSize="10sp"
+                android:textColor="#90d0ab"
+                android:background="@drawable/roundedshape"/>
 
             <Button
                 android:id="@+id/post_search_button"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="18dp"
                 android:layout_marginLeft="@dimen/layout_padding"
                 android:onClick="onSearchClick"
                 android:layout_gravity="end"
-                android:text="search" />
+                android:text="search"
+                android:textColor="#90d0ab"
+                android:textSize="10sp"
+                android:background="@drawable/roundedshape"/>
 
         </LinearLayout>
     </LinearLayout>
@@ -72,19 +82,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@color/colorPrimaryDark">
+        android:background="#ffffff">
         <TextView
             android:id="@+id/gardens_banner_text_view"
             android:layout_width="0dp"
             android:layout_weight="2"
             android:layout_height="wrap_content"
             android:hint="Community Gardens in "
-            android:textSize="18sp"
-            android:padding="@dimen/layout_padding"
-            android:background="#79b2ae"
+            android:textSize="16sp"
+            android:paddingVertical="8dp"
             android:gravity="center"
+            android:layout_gravity="center_vertical"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Title.Inverse"
-            android:visibility="gone"/>
+            android:visibility="gone"
+            android:textColor="@color/colorPrimaryDark"/>
         <TextView
             android:id="@+id/search_toggle_text_view"
             android:layout_width="0dp"
@@ -92,13 +103,12 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:drawableRight="@android:drawable/ic_menu_more"
-            android:drawableTint="#ffffff"
+            android:drawableTint="@color/colorPrimaryDark"
             android:gravity="center_vertical"
-            android:background="@color/colorPrimaryDark"
             android:paddingRight="@dimen/layout_padding"
             android:text="@string/search_option_toggle"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium.Inverse"
-            android:textColor="#ffffff"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="10sp"
             android:paddingVertical="4dp"
             android:paddingLeft="@dimen/layout_padding"
