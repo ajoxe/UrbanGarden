@@ -32,12 +32,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Sample Name"
-            android:textSize="20dp"
+            android:textSize="18sp"
             android:textColor="@color/colorBrown"
             android:paddingHorizontal="@dimen/layout_padding"
             android:paddingVertical="4dp"
             android:layout_marginTop="8dp"
+            android:letterSpacing=".02"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+            android:gravity="center"
             />
 
         <TextView
@@ -48,6 +50,7 @@
             android:textSize="14dp"
             android:paddingHorizontal="@dimen/layout_padding"
             android:layout_marginBottom="16dp"
+            android:gravity="center"
             />
 
         <Button
