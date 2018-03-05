@@ -13,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.android.urbangarden.location.MapsActivity;
+
 public class GardenDetailActivity extends AppCompatActivity {
 
     private TextView parkName, parkAddress;
@@ -21,7 +23,7 @@ public class GardenDetailActivity extends AppCompatActivity {
     Context context;
 
     private String name, address;
-
+    Button getGardenLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,18 @@ public class GardenDetailActivity extends AppCompatActivity {
         parkImage = findViewById(R.id.gardenImage);
         favesButton = findViewById(R.id.favoriteButtonImg);
 
+        getGardenLocation = (Button) findViewById(R.id.mapButton);
+
+        getGardenLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(GardenDetailActivity.this, MapsActivity.class);
+                intent.putExtra("GardenName",parkName.getText().toString());
+                intent.putExtra("GardenAddress",parkAddress.getText().toString() + "New York, NY");
+                startActivity(intent);
+            }
+        });
+
         Intent intent = getIntent();
 //        Bundle b = intent.getExtras();
         //        String getName =intent.getStringExtra("name");
@@ -43,6 +57,7 @@ public class GardenDetailActivity extends AppCompatActivity {
 //            parkName.setText(getName);
         String getName = intent.getStringExtra("name");
         parkName.setText(getName);
+
         String getAddress = intent.getStringExtra("address");
         parkAddress.setText(getAddress);
 
@@ -56,6 +71,7 @@ public class GardenDetailActivity extends AppCompatActivity {
         });
 
     }
+
 
 
 }

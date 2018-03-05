@@ -1,6 +1,9 @@
 package com.example.android.urbangarden.location;
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -28,6 +31,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private GoogleMap mMap;
     private FusedLocationProviderClient mFusedLocationClient;
+    private String name;
+    private String address;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +46,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         Log.d("MapActivity", "onCreate: This runs");
 
-//        Intent intent = getIntent();
-//        latitude = Double.valueOf(intent.getStringExtra("latitude"));
-//        longtitude = Double.valueOf(intent.getStringExtra("longtitude"));
+        Intent intent = getIntent();
+        name = intent.getStringExtra("GardenName");
+        address = intent.getStringExtra("GardenAddress");
+
     }
 
 
@@ -90,6 +96,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION}, 1020);
         } else {
             mMap.setMyLocationEnabled(true);
+        }
+
+//        it works, but we need to get a complete address to get an correct location, the current address we get only has street number and name
+        Geocoder coder = new Geocoder(getApplicationContext());
+        List<Address> address1;
+        LatLng p1 = null;
+
+        try {
+            // May throw an IOException
+            address1 = coder.getFromLocationName(address, 5);
+            if (address1 != null) {
+                Address location = address1.get(0);
+                p1 = new LatLng(location.getLatitude(), location.getLongitude());
+                mMap.addMarker(new MarkerOptions().position(p1).title(name).icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher_round)));
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
     }
 
