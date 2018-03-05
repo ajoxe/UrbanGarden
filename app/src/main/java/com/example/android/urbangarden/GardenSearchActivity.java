@@ -32,6 +32,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -68,6 +69,7 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
     TextView textBanner;
     Button zipButton;
     Button mapButton;
+
 
     String spinnerOption;
     String searchQuery;
@@ -106,6 +108,7 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
         searchLayout = (LinearLayout) findViewById(R.id.search_layout);
         textBanner = (TextView) findViewById(R.id.gardens_banner_text_view);
         zipButton =(Button) findViewById(R.id.zip_button);
+
 
         setToggleClick();
         getLocation();
@@ -177,6 +180,7 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
     public void onSearchClick(View view) {
         searchLayout.setVisibility(View.GONE);
         searchToggle.setVisibility(View.VISIBLE);
+
         zipEditTextString = searchEditText.getText().toString();
 
         if (!zipEditTextString.equals("")) {
@@ -329,12 +333,12 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
     }
 
     private void updateMenuTitles() {
-        MenuItem userMenuItem = menu.findItem(R.id.user);
+       /* MenuItem userMenuItem = menu.findItem(R.id.user);
         if (user != null) {
             userMenuItem.setTitle(user);
         } else {
             userMenuItem.setTitle("User");
-        }
+        }*/
     }
 
 
@@ -377,12 +381,14 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
                 Log.e(TAG, "Setting was clicked");
                 break;
 
-            case R.id.sign_out:
+            case R.id.search_item:
                 user = null;
                 updateMenuTitles();
                 hideOption(user);
                 showOption(user);
-                Log.e(TAG, "Sign out button was clicked");
+                Log.e(TAG, "Search out button was clicked");
+                /*Intent searchIntent = new Intent(GardenSearchActivity.this, GardenSearchActivity.class);
+                startActivity(searchIntent);*/
                 break;
 
             default:
@@ -433,21 +439,22 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
     }
 
     public static void hideSoftKeyboard(Activity activity) {
-        InputMethodManager inputMethodManager =
-                (InputMethodManager) activity.getSystemService(
-                        Activity.INPUT_METHOD_SERVICE);
-        inputMethodManager.hideSoftInputFromWindow(
-                activity.getCurrentFocus().getWindowToken(), 0);
+        try{
+            if (activity != null) {
+                InputMethodManager inputMethodManager =
+                        (InputMethodManager) activity.getSystemService(
+                                Activity.INPUT_METHOD_SERVICE);
+                inputMethodManager.hideSoftInputFromWindow(
+                        activity.getCurrentFocus().getWindowToken(), 0);
+            }
+
+        }catch (NullPointerException n){
+            n.printStackTrace();
+        }
+
     }
 
-    public static void showSoftKeyboard(Activity activity) {
-        InputMethodManager inputMethodManager =
-                (InputMethodManager) activity.getSystemService(
-                        Activity.INPUT_METHOD_SERVICE);
-        /*inputMethodManager.hideSoftInputFromWindow(
-                activity.getCurrentFocus().getWindowToken(), 0);*/
-        inputMethodManager.showSoftInputFromInputMethod(activity.getCurrentFocus().getWindowToken(), 0);
-    }
+
 
     public void setupUI(View view) {
 
