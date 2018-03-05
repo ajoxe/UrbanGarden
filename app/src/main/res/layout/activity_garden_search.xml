@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:id="@+id/parent"
-    android:background="@drawable/leafbackground"
+    android:background="@drawable/opaqueleaves"
     tools:context="com.example.android.urbangarden.GardenSearchActivity">
 
 
@@ -98,7 +98,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="#2b1d0e">
+        android:background="#2b1d0e"
+        android:paddingVertical="2dp">
         <TextView
             android:id="@+id/gardens_banner_text_view"
             android:layout_width="0dp"
@@ -107,7 +108,6 @@
             android:hint="Community Gardens in "
             android:ellipsize="end"
             android:textSize="16sp"
-            android:paddingVertical="8dp"
             android:gravity="center"
             android:layout_gravity="center_vertical"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Title.Inverse"
@@ -123,11 +123,8 @@
             android:drawableTint="@color/colorPrimaryDark"
             android:gravity="center_vertical"
             android:paddingRight="@dimen/layout_padding"
-            android:text="@string/search_option_toggle"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium.Inverse"
             android:textColor="@color/colorPrimary"
-            android:textSize="10sp"
-            android:paddingVertical="4dp"
             android:paddingLeft="@dimen/layout_padding"
             android:visibility="gone"
             />

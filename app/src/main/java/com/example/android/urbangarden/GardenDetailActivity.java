@@ -29,14 +29,20 @@ public class GardenDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_garden_detail);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setLogo(R.drawable.smalllogo);
-        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setBackgroundDrawable(getDrawable(R.drawable.roundedshapegreen));
+
+        Intent intent = getIntent();
+//        Bundle b = intent.getExtras();
+        //        String getName =intent.getStringExtra("name");
+        //      Log.d("PARKNAME", getName);
+//            parkName.setText(getName);
+        String getName = intent.getStringExtra("name");
 
         parkName = findViewById(R.id.gardenName);
         parkAddress = findViewById(R.id.gardenAddress);
         parkImage = findViewById(R.id.gardenImage);
         favesButton = findViewById(R.id.favoriteButtonImg);
+        getSupportActionBar().setTitle(getName);
 
         getGardenLocation = (Button) findViewById(R.id.mapButton);
 
@@ -50,12 +56,14 @@ public class GardenDetailActivity extends AppCompatActivity {
             }
         });
 
+
         Intent intent = getIntent();
 //        Bundle b = intent.getExtras();
         //        String getName =intent.getStringExtra("name");
         //      Log.d("PARKNAME", getName);
 //            parkName.setText(getName);
         final String getName = intent.getStringExtra("name");
+
         parkName.setText(getName);
 
         String getAddress = intent.getStringExtra("address");
