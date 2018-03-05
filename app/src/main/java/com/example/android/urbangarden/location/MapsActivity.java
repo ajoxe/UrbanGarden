@@ -152,15 +152,28 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if (addressArray != null) {
             List <Address> addressList = new ArrayList<>();
             List <Address> addressCoder;
-            String[] tenAddress = new String[10];
+            String[] smallAddressList = new String[10];
             LatLng p2;
-            for (int i = 0; i< 10; i++){
-                tenAddress[i] = addressArray[i];
+            if(addressArray.length > 10){
+                for (int i = 0; i< 10; i++){
+                    smallAddressList[i] = addressArray[i];
+                }
+            } else if(addressArray.length > 5){
+                for (int i = 0; i< 5; i++){
+                    smallAddressList[i] = addressArray[i];
+                }
+            } else if (addressArray.length >3){
+                for (int i = 0; i< 3; i++){
+                    smallAddressList[i] = addressArray[i];
+                }
+            } else {
+                smallAddressList[0] = addressArray[0];
             }
+
             try {
                 // May throw an IOException
-                for (String addressString : tenAddress){
-                    addressCoder = coder.getFromLocationName(addressString, 5);
+                for (String addressString : smallAddressList){
+                    addressCoder = coder.getFromLocationName(addressString, 3);
                     Log.d("addressString", "string" + addressString);
                     Log.d("addressCoder", "size " + addressCoder.size());
                     addressList.add(addressCoder.get(0));

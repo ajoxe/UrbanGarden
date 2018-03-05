@@ -4,8 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
 
     <LinearLayout
@@ -88,8 +87,54 @@
             android:gravity="center"
             android:text="Add to Favorites" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/colorBrown"
+            android:text="Garden Photos"
+            android:layout_marginTop="16dp"
+            android:textColor="#ffffff"
+            android:letterSpacing=".07"
+            android:paddingVertical="8dp"
+            android:paddingHorizontal="@dimen/layout_padding"
+            android:textAllCaps="true"/>
+
+        <RelativeLayout
+            android:id="@+id/imgage_grid"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+
+            >
+            <ImageView
+                android:layout_width="300dp"
+                android:layout_height="250dp"
+                android:src="@drawable/scarecrow"
+                android:scaleType="centerCrop"
+                android:foregroundTintMode="multiply"
+                android:layout_alignParentRight="true"
+                />
+            <ImageView
+                android:layout_width="160dp"
+                android:layout_height="200dp"
+                android:src="@drawable/veggies"
+                android:scaleType="centerCrop"
+                android:foregroundTintMode="multiply"
+                android:layout_alignParentTop="true"/>
+            <ImageView
+                android:id="@+id/bottom_img"
+                android:layout_width="match_parent"
+                android:layout_height="225dp"
+                android:src="@drawable/sunflower"
+                android:scaleType="centerCrop"
+                android:foregroundTintMode="multiply"
+                android:layout_alignParentBottom="true"/>
+
+
+        </RelativeLayout>
+
 
     </LinearLayout>
+
 
 </ScrollView>
 

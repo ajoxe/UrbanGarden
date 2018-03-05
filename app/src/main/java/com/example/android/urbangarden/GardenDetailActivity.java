@@ -113,12 +113,12 @@ public class GardenDetailActivity extends AppCompatActivity {
     }
 
     private void updateMenuTitles() {
-        MenuItem userMenuItem = menu.findItem(R.id.user);
+       /* MenuItem userMenuItem = menu.findItem(R.id.user);
         if (user != null) {
             userMenuItem.setTitle(user);
         } else {
             userMenuItem.setTitle("User");
-        }
+        }*/
     }
 
 
@@ -161,12 +161,14 @@ public class GardenDetailActivity extends AppCompatActivity {
                 Log.e(TAG, "Setting was clicked");
                 break;
 
-            case R.id.sign_out:
+            case R.id.search_item:
                 user = null;
                 updateMenuTitles();
                 hideOption(user);
                 showOption(user);
-                Log.e(TAG, "Sign out button was clicked");
+                Log.e(TAG, "Search out button was clicked");
+                Intent searchIntent = new Intent(GardenDetailActivity.this, GardenSearchActivity.class);
+                startActivity(searchIntent);
                 break;
 
             default:

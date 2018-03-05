@@ -2,27 +2,27 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:title="Login"
-        android:id="@+id/login" />
 
-    <item android:title="User"
-        android:id="@+id/user"/>
 
-    <item android:title="User Profile"
-        android:id="@+id/user_profile"/>
+    <item android:title="Community Gardens"
+        android:id="@+id/search_item"/>
+
+    <item android:title="My Favorite Gardens"
+        android:id="@+id/fav_list"/>
 
     <item android:title="My Posts"
         android:id="@+id/my_posts"/>
 
+    <item android:title="My Profile"
+        android:id="@+id/user_profile"/>
 
-    <item android:title="Favorite list"
-        android:id="@+id/fav_list"/>
+    <item android:title="Login"
+        android:id="@+id/login" />
 
     <item android:title="Settings"
         android:id="@+id/setting"/>
 
-    <item android:title="Sign Out"
-        android:id="@+id/sign_out"/>
+
 
 
 

@@ -2,6 +2,8 @@
 <resources>
     <color name="colorPrimary">#90d0ab</color>
     <color name="colorPrimaryT">#ca90d0ab</color>
+    <color name="colorPrimaryTT">#79274835</color>
+    <color name="colorPrimaryTTT">#2090d0ab</color>
     <color name="colorT">#0090d0ab</color>
     <color name="colorPrimaryBack">#edfaf2</color>
     <color name="colorPrimaryDark">#79b2ae</color>

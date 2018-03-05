@@ -15,7 +15,6 @@
         android:id="@+id/search_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/layout_padding"
         android:orientation="vertical"
         android:padding="@dimen/layout_padding"
         android:background="#2b1d0e">
@@ -46,6 +45,7 @@
                 android:imeOptions="actionDone"
                 android:textColor="#90d0ab"
                 android:visibility="gone"
+                android:textColorHint="@color/colorPrimaryT"
                 />
 
         </LinearLayout>
@@ -95,11 +95,12 @@
         </LinearLayout>
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/banner_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:background="#2b1d0e"
-        android:paddingVertical="2dp"
+        android:paddingTop="2dp"
         android:paddingHorizontal="@dimen/layout_padding">
         <TextView
             android:id="@+id/gardens_banner_text_view"
@@ -108,11 +109,12 @@
             android:layout_height="wrap_content"
             android:hint="Community Gardens in "
             android:ellipsize="end"
+            android:visibility="gone"
             android:textSize="16sp"
             android:layout_gravity="center_vertical"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Title.Inverse"
-            android:visibility="gone"
-            android:textColor="@color/colorPrimary"/>
+            android:textColor="@color/colorPrimary"
+            />
         <TextView
             android:id="@+id/search_toggle_text_view"
             android:layout_width="0dp"
@@ -122,11 +124,10 @@
             android:drawableRight="@android:drawable/ic_menu_more"
             android:drawableTint="@color/colorPrimaryDark"
             android:gravity="center_vertical"
+            android:visibility="gone"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium.Inverse"
             android:textColor="@color/colorPrimary"
             android:paddingLeft="@dimen/layout_padding"
-            android:visibility="gone"
-
             />
 
     </LinearLayout>
@@ -134,11 +135,11 @@
     <Button
         android:id="@+id/map_button"
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:text="See Map"
         android:drawableRight="@android:drawable/ic_dialog_map"
         android:drawableTint="@color/colorBrown"
-        android:backgroundTint="@color/colorPrimaryT"
+        android:background="@color/colorPrimaryTTT"
         android:onClick="seeMapClick"
         android:textColor="@color/colorBrown"
         android:textSize="12sp"
@@ -147,6 +148,7 @@
         android:layout_marginRight="@dimen/layout_padding"
         android:visibility="gone"
         />
+
 
 
     <android.support.v7.widget.RecyclerView
