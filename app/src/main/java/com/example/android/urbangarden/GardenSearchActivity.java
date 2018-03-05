@@ -404,6 +404,10 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
                 zipEditTextString = "";
                 searchEditText.setText("");
                 textBanner.setVisibility(View.GONE);
+                zipButton.setBackground(getDrawable(R.drawable.roundedshape));
+                zipButton.setTextColor(Color.parseColor("#90d0ab"));
+                searchEditText.setVisibility(View.GONE);
+                spinner.setVisibility(View.VISIBLE);
             }
         });
 
