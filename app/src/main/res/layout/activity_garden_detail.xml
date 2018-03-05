@@ -60,7 +60,8 @@
             android:padding="8dp"
             android:drawableEnd="@android:drawable/ic_dialog_map"
             android:drawableTint="@color/colorBrown"
-            android:textColor="@color/colorBrown"/>
+            android:textColor="@color/colorBrown"
+            android:layout_marginBottom="@dimen/layout_padding"/>
 
         <TextView
             android:layout_width="match_parent"
