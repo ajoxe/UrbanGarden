@@ -66,6 +66,7 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
     LinearLayout searchLayout;
     Context context;
     TextView textBanner;
+    Button zipButton;
 
     String spinnerOption;
     String searchQuery;
@@ -101,6 +102,7 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
         searchToggle = (TextView) findViewById(R.id.search_toggle_text_view);
         searchLayout = (LinearLayout) findViewById(R.id.search_layout);
         textBanner = (TextView) findViewById(R.id.gardens_banner_text_view);
+        zipButton =(Button) findViewById(R.id.zip_button);
 
         setToggleClick();
         getLocation();
@@ -109,12 +111,16 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
         recyclerView.setAdapter(gardenAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
         searchEditText = (EditText) findViewById(R.id.search_query_edit_text);
+
+
+
         searchEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 boolean handled = false;
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
                     onSearchClick(v);
+                    hideSoftKeyboard(GardenSearchActivity.this);
                     handled = true;
                 }
                 return handled;
@@ -139,6 +145,13 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
                 startActivity(intent);
             }
         });
+    }
+
+    public void onZipClick(View view){
+        zipButton.setBackgroundColor(Color.parseColor("#90d0ab"));
+        zipButton.setTextColor(Color.parseColor("#ffffff"));
+        searchEditText.setVisibility(View.VISIBLE);
+        spinner.setVisibility(View.GONE);
     }
 
     //sets up the spinner
@@ -402,6 +415,15 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
                         Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(
                 activity.getCurrentFocus().getWindowToken(), 0);
+    }
+
+    public static void showSoftKeyboard(Activity activity) {
+        InputMethodManager inputMethodManager =
+                (InputMethodManager) activity.getSystemService(
+                        Activity.INPUT_METHOD_SERVICE);
+        /*inputMethodManager.hideSoftInputFromWindow(
+                activity.getCurrentFocus().getWindowToken(), 0);*/
+        inputMethodManager.showSoftInputFromInputMethod(activity.getCurrentFocus().getWindowToken(), 0);
     }
 
     public void setupUI(View view) {

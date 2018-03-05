@@ -39,11 +39,13 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/enter_search_query"
                 android:inputType="number"
+                android:ellipsize="end"
                 android:textSize="14sp"
                 android:maxLines="1"
                 android:maxLength="5"
                 android:imeOptions="actionDone"
                 android:textColor="#90d0ab"
+                android:visibility="gone"
                 />
 
         </LinearLayout>
@@ -52,14 +54,27 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="end">
+            android:gravity="end"
+            android:layout_marginTop="@dimen/layout_padding">
+
+            <Button
+                android:id="@+id/zip_button"
+                android:layout_width="wrap_content"
+                android:layout_height="18dp"
+                android:onClick="onZipClick"
+                android:text="use zip"
+                android:textSize="10sp"
+                android:textColor="#90d0ab"
+                android:background="@drawable/roundedshape"
+                android:layout_marginRight="@dimen/layout_padding"/>
 
             <Button
                 android:id="@+id/get_location_button"
                 android:layout_width="wrap_content"
                 android:layout_height="18dp"
                 android:onClick="onSearchClick"
-                android:text="get location"
+                android:text="use my location"
+                android:paddingHorizontal="8dp"
                 android:textSize="10sp"
                 android:textColor="#90d0ab"
                 android:background="@drawable/roundedshape"/>
@@ -72,7 +87,8 @@
                 android:onClick="onSearchClick"
                 android:layout_gravity="end"
                 android:text="search"
-                android:textColor="#90d0ab"
+                android:textColor="#ffffff"
+                android:backgroundTint="#90d0ab"
                 android:textSize="10sp"
                 android:background="@drawable/roundedshape"/>
 
@@ -89,6 +105,7 @@
             android:layout_weight="2"
             android:layout_height="wrap_content"
             android:hint="Community Gardens in "
+            android:ellipsize="end"
             android:textSize="16sp"
             android:paddingVertical="8dp"
             android:gravity="center"
