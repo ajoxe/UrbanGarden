@@ -28,7 +28,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Title.Inverse"
-                android:textColor="#ffffff"
+                android:textColor="#effcf4"
                 android:textSize="18sp"
                 tools:text="garden name" />
 
