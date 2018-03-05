@@ -15,7 +15,8 @@
         android:roundIcon="@drawable/leaflogodarkergreen"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".GardenSearchActivity"
+        <activity
+            android:name=".GardenSearchActivity"
             android:theme="@style/ActionBar" />
         <activity
             android:name=".SplashActivity"
@@ -26,10 +27,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".GardenDetailActivity"
-            android:theme="@style/ActionBar"/>
-        <activity android:name=".MyGardensActivity"
-            android:theme="@style/ActionBar"/>
+        <activity
+            android:name=".GardenDetailActivity"
+            android:theme="@style/ActionBar" />
+        <activity
+            android:name=".MyGardensActivity"
+            android:theme="@style/ActionBar" />
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -46,16 +49,21 @@
         <activity
             android:name=".location.MapsActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".userloginandregister.LoginActivity"
-            android:theme="@style/ActionBar"/>
-        <activity android:name=".userloginandregister.RegisterActivity"
-            android:theme="@style/ActionBar"/>
-        <activity android:name=".userloginandregister.SettingsActivity"
-            android:theme="@style/ActionBar"/>
-        <activity android:name=".userloginandregister.MyPostsActivity"
-            android:theme="@style/ActionBar"/>
-        <activity android:name=".userloginandregister.UserActivity"
-            android:theme="@style/ActionBar"></activity>
+        <activity
+            android:name=".userloginandregister.LoginActivity"
+            android:theme="@style/ActionBar" />
+        <activity
+            android:name=".userloginandregister.RegisterActivity"
+            android:theme="@style/ActionBar" />
+        <activity
+            android:name=".userloginandregister.SettingsActivity"
+            android:theme="@style/ActionBar" />
+        <activity
+            android:name=".userloginandregister.MyPostsActivity"
+            android:theme="@style/ActionBar" />
+        <activity
+            android:name=".userloginandregister.UserActivity"
+            android:theme="@style/ActionBar" />
     </application>
 
 </manifest>

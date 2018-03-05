@@ -126,9 +126,27 @@
             android:textColor="@color/colorPrimary"
             android:paddingLeft="@dimen/layout_padding"
             android:visibility="gone"
+
             />
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/map_button"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="See Map"
+        android:drawableRight="@android:drawable/ic_dialog_map"
+        android:drawableTint="@color/colorBrown"
+        android:backgroundTint="@color/colorPrimaryT"
+        android:onClick="seeMapClick"
+        android:textColor="@color/colorBrown"
+        android:textSize="12sp"
+        android:drawablePadding="10dp"
+        android:layout_gravity="end"
+        android:layout_marginRight="@dimen/layout_padding"
+        android:visibility="gone"
+        />
 
 
     <android.support.v7.widget.RecyclerView
