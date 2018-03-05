@@ -128,10 +128,9 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
         });
 
 
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setLogo(R.drawable.smalllogo);
-        getSupportActionBar().setDisplayUseLogoEnabled(true);
-        getSupportActionBar().setTitle(" Urban Gardens");
+
+
+        getSupportActionBar().setBackgroundDrawable(getDrawable(R.drawable.applbarleaves));
 
         Intent intent = getIntent();
         user = intent.getStringExtra("currentUser");

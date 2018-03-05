@@ -11,5 +11,7 @@ public class MyPostsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_posts);
+        getSupportActionBar().setBackgroundDrawable(getDrawable(R.drawable.roundedshapegreen));
+        getSupportActionBar().setTitle("My Garden");
     }
 }

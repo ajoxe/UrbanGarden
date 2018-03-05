@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#90d0ab</color>
-    <color name="colorPrimaryBack">#9eb4a7</color>
+    <color name="colorPrimaryT">#da90d0ab</color>
+    <color name="colorT">#0090d0ab</color>
+    <color name="colorPrimaryBack">#edfaf2</color>
     <color name="colorPrimaryDark">#79b2ae</color>
     <color name="colorAccent">#71945a</color>
     <color name="colorBrown">#2b1d0e</color>
-    <color name="colorLigthBrown">#743e03</color>
+    <color name="colorLigthBrown">#31210f</color>
     <color name="foreground_material_light">#323c31</color>
+    <color name="primary_dark_material_light">#edfaf2</color>
 
 </resources>
