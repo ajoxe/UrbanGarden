@@ -7,14 +7,8 @@
     <item android:title="Community Gardens"
         android:id="@+id/search_item"/>
 
-    <item android:title="My Favorite Gardens"
+    <item android:title="My Garden"
         android:id="@+id/fav_list"/>
-
-    <item android:title="My Posts"
-        android:id="@+id/my_posts"/>
-
-    <item android:title="My Profile"
-        android:id="@+id/user_profile"/>
 
     <item android:title="Login"
         android:id="@+id/login" />

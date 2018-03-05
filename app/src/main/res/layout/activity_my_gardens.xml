@@ -7,13 +7,118 @@
     android:orientation="vertical"
     android:background="@drawable/opaqueleaves"
     tools:context="com.example.android.urbangarden.MyGardensActivity">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/layout_padding">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/scarecrow"
+                    android:scaleType="centerCrop"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Bed-Stuy Farm"
+                    android:textSize="12sp"
+                    android:layout_marginTop="8dp"
+                    android:textColor="@color/colorBrown"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="since 2015"
+                    android:textSize="10sp"
+                    android:textColor="@color/colorBrown"
+                    />
+
+
+
+            </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/profile_quote"
+                    android:textSize="14sp"
+                    android:layout_marginLeft="@dimen/layout_padding"/>
+
+
+            </LinearLayout>
+
+
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:background="@color/colorBrown"/>
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/saved_recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="40dp"
+        android:background="@color/colorBrown"
+        android:text="Bed-Stuy Farm Community"
+        android:layout_marginTop="16dp"
+        android:textColor="#ffffff"
+        android:letterSpacing=".07"
+        android:paddingVertical="8dp"
+        android:paddingHorizontal="@dimen/layout_padding"
+        android:textAllCaps="true"/>
 
+    <RelativeLayout
+        android:id="@+id/imgage_grid"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+
+        >
+        <ImageView
+            android:layout_width="300dp"
+            android:layout_height="250dp"
+            android:src="@drawable/scarecrow"
+            android:scaleType="centerCrop"
+            android:foregroundTintMode="multiply"
+            android:layout_alignParentRight="true"
+            />
+        <ImageView
+            android:layout_width="160dp"
+            android:layout_height="200dp"
+            android:src="@drawable/veggies"
+            android:scaleType="centerCrop"
+            android:foregroundTintMode="multiply"
+            android:layout_alignParentTop="true"/>
+        <ImageView
+            android:id="@+id/bottom_img"
+            android:layout_width="match_parent"
+            android:layout_height="225dp"
+            android:src="@drawable/sunflower"
+            android:scaleType="centerCrop"
+            android:foregroundTintMode="multiply"
+            android:layout_alignParentBottom="true"/>
+
+
+    </RelativeLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/colorBrown"
+                android:text="My Favorite Gardens"
+                android:textColor="#ffffff"
+                android:letterSpacing=".07"
+                android:paddingVertical="8dp"
+                android:paddingHorizontal="@dimen/layout_padding"
+                android:textAllCaps="true"/>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/saved_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

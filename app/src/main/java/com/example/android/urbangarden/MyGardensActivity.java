@@ -42,8 +42,8 @@ public class MyGardensActivity extends AppCompatActivity {
 
        savedGardens.addAll(GardensDataManager.getSavedGardens(GardensDatabase.getGardensDatabase(getApplicationContext())));
         Log.d("saved activity", "list size" + savedGardens.size());
-        getSupportActionBar().setBackgroundDrawable(getDrawable(R.drawable.applbarleaves));
-        getSupportActionBar().setTitle("My Gardens");
+        getSupportActionBar().setBackgroundDrawable(getDrawable(R.drawable.roundedshapegreen));
+        getSupportActionBar().setTitle("My Garden");
 
         context = getApplicationContext();
 
@@ -99,7 +99,7 @@ public class MyGardensActivity extends AppCompatActivity {
                 Log.e(TAG, "login button was clicked");
                 break;
 
-            case R.id.user_profile:
+            /*case R.id.user_profile:
                 Intent intent0 = new Intent(MyGardensActivity.this, UserActivity.class);
 //                intent.putExtra("myGardenList", "");
                 startActivity(intent0);
@@ -112,7 +112,7 @@ public class MyGardensActivity extends AppCompatActivity {
                 startActivity(intent1);
                 Log.e(TAG, "my posts button was clicked");
                 break;
-
+*/
             case R.id.fav_list:
                 GardensDataManager.getSavedGardens(GardensDatabase.getGardensDatabase(getApplicationContext()));
                 Intent intent2 = new Intent(MyGardensActivity.this, MyGardensActivity.class);
