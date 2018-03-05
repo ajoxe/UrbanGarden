@@ -21,7 +21,7 @@ import java.util.List;
 public class DummyDataUtility {
     public List<Garden> gardenList;
 
-    public void buildGuideList(Context context){
+    public List<Garden> buildDummyList(Context context){
         Type collectiontype = new TypeToken<Collection<Garden>>() {
         }.getType();
         Gson gs = new Gson();
@@ -31,7 +31,11 @@ public class DummyDataUtility {
         gardens = gs.fromJson(isr, collectiontype);
         gardenList = new ArrayList<>();
         gardenList.addAll(gardens);
+
+        return gardenList;
     }
+
+
 
     public List<Garden> addSavedGardens(List<Garden> gardenList){
         if(gardenList.size()>6) {
@@ -44,6 +48,5 @@ public class DummyDataUtility {
             }
         }
         return gardenList;
-
     }
 }

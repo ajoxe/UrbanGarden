@@ -68,10 +68,11 @@
         android:text="Bed-Stuy Farm Community"
         android:layout_marginTop="16dp"
         android:textColor="#ffffff"
-        android:letterSpacing=".07"
+        android:letterSpacing=".1"
         android:paddingVertical="8dp"
         android:paddingHorizontal="@dimen/layout_padding"
-        android:textAllCaps="true"/>
+        android:textAllCaps="true"
+        />
 
     <RelativeLayout
         android:id="@+id/imgage_grid"
@@ -111,7 +112,7 @@
                 android:background="@color/colorBrown"
                 android:text="My Favorite Gardens"
                 android:textColor="#ffffff"
-                android:letterSpacing=".07"
+                android:letterSpacing=".1"
                 android:paddingVertical="8dp"
                 android:paddingHorizontal="@dimen/layout_padding"
                 android:textAllCaps="true"/>
