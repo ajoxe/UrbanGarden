@@ -69,8 +69,7 @@ public class GardenDetailActivity extends AppCompatActivity {
         });
 
 
-
-        parkName.setText(getName);
+        parkName.setText(getName1);
 
         String getAddress = intent.getStringExtra("address");
         parkAddress.setText(getAddress);
@@ -80,7 +79,7 @@ public class GardenDetailActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 favesButton.setBackground(ContextCompat.getDrawable(getApplicationContext(),R.drawable.ic_filter_vintage_black2_24dp));
-                Toast.makeText(getApplicationContext(), getName + " added to favorites!", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), getName1 + " added to favorites!", Toast.LENGTH_LONG).show();
 
             }
         });
