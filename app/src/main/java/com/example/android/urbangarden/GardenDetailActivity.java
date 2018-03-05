@@ -69,6 +69,14 @@ public class GardenDetailActivity extends AppCompatActivity {
             }
         });
 
+
+        Intent intent = getIntent();
+//        Bundle b = intent.getExtras();
+        //        String getName =intent.getStringExtra("name");
+        //      Log.d("PARKNAME", getName);
+//            parkName.setText(getName);
+        final String getName = intent.getStringExtra("name");
+
         parkName.setText(getName);
 
         String getAddress = intent.getStringExtra("address");
@@ -78,7 +86,8 @@ public class GardenDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                favesButton.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_filter_vintage_black2_24dp));
+                favesButton.setBackground(ContextCompat.getDrawable(getApplicationContext(),R.drawable.ic_filter_vintage_black2_24dp));
+                Toast.makeText(getApplicationContext(), getName + " added to favorites!", Toast.LENGTH_LONG).show();
 
             }
         });

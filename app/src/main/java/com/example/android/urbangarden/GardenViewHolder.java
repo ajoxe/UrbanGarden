@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.android.urbangarden.database.GardensDataManager;
 import com.example.android.urbangarden.database.GardensDatabase;
@@ -63,7 +64,7 @@ public class GardenViewHolder extends RecyclerView.ViewHolder {
 
                 String gardenId = gardenData.getPropid();
                 favesButton.setBackground(ContextCompat.getDrawable(context, R.drawable.ic_filter_vintage_black2_24dp));
-
+                Toast.makeText(context, gardenData.getGarden_name() + " added to favorites!", Toast.LENGTH_SHORT).show();
 
                 GardensDataManager.updateGardenToSaved(gardenId, GardensDatabase.getGardensDatabase(context));
                 Log.d("faves onclick", "SAVED GARDEN  : ");
