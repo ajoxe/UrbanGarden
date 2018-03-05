@@ -40,7 +40,8 @@ public class GardenViewHolder extends RecyclerView.ViewHolder {
     public void bind(final Garden gardenData, final Context context) {
         gardenName.setText(gardenData.getGarden_name());
         neighborhood.setText(gardenData.getNeighborhoodname());
-        borough.setText(gardenData.getBoro());
+
+        borough.setText(convertBoro(gardenData.getBoro()));
 
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,5 +70,22 @@ public class GardenViewHolder extends RecyclerView.ViewHolder {
 
             }
         });
+    }
+
+    public String convertBoro(String boro){
+        switch (boro){
+            case "B":
+                return "Brooklyn";
+            case "M":
+                return "Manhattan";
+            case "X":
+                return "Bronx";
+            case "Q":
+                return "Queens";
+            case "R":
+                return "Staten Island";
+            default:
+                return boro;
+        }
     }
 }
