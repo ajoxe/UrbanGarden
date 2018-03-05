@@ -28,6 +28,7 @@
             android:paddingHorizontal="@dimen/layout_padding"
             android:paddingTop="16dp"
             android:layout_alignParentTop="true"
+
             android:letterSpacing=".05"
             android:background="@drawable/roundedshapebrown"
             android:backgroundTint="#f1afdcc1"
@@ -40,13 +41,14 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:paddingHorizontal="@dimen/layout_padding"
-            android:paddingVertical="4dp"
+            android:paddingVertical="8dp"
            >
         <LinearLayout
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_gravity="center">
 
 
             <TextView
@@ -56,6 +58,8 @@
                 android:layout_below="@id/garden_name_textview"
                 android:onClick="onToggleFlower"
                 android:textColor="@color/colorAccent"
+                android:gravity="center"
+                android:layout_gravity="center"
                 android:textSize="16sp"
                 tools:text="neighborhood" />
 
@@ -66,6 +70,8 @@
                 android:layout_below="@id/neighborhood_textview"
                 android:textColor="@color/colorAccent"
                 android:textSize="16sp"
+                android:gravity="center"
+                android:layout_gravity="center"
                 tools:text="borough" />
 
 
