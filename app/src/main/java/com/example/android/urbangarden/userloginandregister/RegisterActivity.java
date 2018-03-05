@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.android.urbangarden.GardenSearchActivity;
 import com.example.android.urbangarden.MyGardensActivity;
 import com.example.android.urbangarden.R;
 import com.example.android.urbangarden.database.GardensDataManager;
@@ -89,12 +90,12 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void updateMenuTitles() {
-        MenuItem userMenuItem = menu.findItem(R.id.user);
+        /*MenuItem userMenuItem = menu.findItem(R.id.user);
         if (user != null) {
             userMenuItem.setTitle(user);
         } else {
             userMenuItem.setTitle("User");
-        }
+        }*/
     }
 
 
@@ -107,7 +108,7 @@ public class RegisterActivity extends AppCompatActivity {
                 startActivity(intent);
                 Log.e(TAG, "login button was clicked");
                 break;
-
+/*
             case R.id.user_profile:
                 Intent intent0 = new Intent(RegisterActivity.this, UserActivity.class);
 //                intent.putExtra("myGardenList", "");
@@ -120,7 +121,7 @@ public class RegisterActivity extends AppCompatActivity {
 //                intent.putExtra("myGardenList", "");
                 startActivity(intent1);
                 Log.e(TAG, "my posts button was clicked");
-                break;
+                break;*/
 
             case R.id.fav_list:
                 GardensDataManager.getSavedGardens(GardensDatabase.getGardensDatabase(getApplicationContext()));
@@ -137,12 +138,14 @@ public class RegisterActivity extends AppCompatActivity {
                 Log.e(TAG, "Setting was clicked");
                 break;
 
-            case R.id.sign_out:
+            case R.id.search_item:
                 user = null;
                 updateMenuTitles();
                 hideOption(user);
                 showOption(user);
-                Log.e(TAG, "Sign out button was clicked");
+                Log.e(TAG, "Search out button was clicked");
+                Intent searchIntent = new Intent(RegisterActivity.this, GardenSearchActivity.class);
+                startActivity(searchIntent);
                 break;
 
             default:

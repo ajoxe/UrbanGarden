@@ -109,12 +109,12 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void updateMenuTitles() {
-        MenuItem userMenuItem = menu.findItem(R.id.user);
+       /* MenuItem userMenuItem = menu.findItem(R.id.user);
         if (user != null) {
             userMenuItem.setTitle(user);
         } else {
             userMenuItem.setTitle("User");
-        }
+        }*/
     }
 
 
@@ -128,20 +128,20 @@ public class LoginActivity extends AppCompatActivity {
                 Log.e(TAG, "login button was clicked");
                 break;
 
-            case R.id.user_profile:
-                Intent intent0 = new Intent(LoginActivity.this, UserActivity.class);
+            /*case R.id.user_profile:
+                Intent intent0 = new Intent(MyGardensActivity.this, UserActivity.class);
 //                intent.putExtra("myGardenList", "");
                 startActivity(intent0);
                 Log.e(TAG, "my posts button was clicked");
                 break;
 
             case R.id.my_posts:
-                Intent intent1 = new Intent(LoginActivity.this, MyPostsActivity.class);
+                Intent intent1 = new Intent(MyGardensActivity.this, MyPostsActivity.class);
 //                intent.putExtra("myGardenList", "");
                 startActivity(intent1);
                 Log.e(TAG, "my posts button was clicked");
                 break;
-
+*/
             case R.id.fav_list:
                 GardensDataManager.getSavedGardens(GardensDatabase.getGardensDatabase(getApplicationContext()));
                 Intent intent2 = new Intent(LoginActivity.this, MyGardensActivity.class);
@@ -157,12 +157,14 @@ public class LoginActivity extends AppCompatActivity {
                 Log.e(TAG, "Setting was clicked");
                 break;
 
-            case R.id.sign_out:
+            case R.id.search_item:
                 user = null;
                 updateMenuTitles();
                 hideOption(user);
                 showOption(user);
-                Log.e(TAG, "Sign out button was clicked");
+                Log.e(TAG, "Search out button was clicked");
+                Intent searchIntent = new Intent(LoginActivity.this, GardenSearchActivity.class);
+                startActivity(searchIntent);
                 break;
 
             default:
