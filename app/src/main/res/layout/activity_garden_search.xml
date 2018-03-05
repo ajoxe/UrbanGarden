@@ -130,18 +130,21 @@
             />
 
     </LinearLayout>
+
     <Button
         android:id="@+id/map_button"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:drawableStart="@android:drawable/ic_dialog_map"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="See Map"
+        android:drawableRight="@android:drawable/ic_dialog_map"
         android:drawableTint="@color/colorBrown"
-       android:onClick="seeMapClick"
-        android:drawablePadding="@dimen/layout_padding"
-        android:background="@color/colorPrimary"
+        android:backgroundTint="@color/colorPrimaryT"
+        android:onClick="seeMapClick"
+        android:textColor="@color/colorBrown"
+        android:textSize="12sp"
+        android:drawablePadding="10dp"
         android:layout_gravity="end"
         android:layout_marginRight="@dimen/layout_padding"
-        android:layout_marginVertical="8dp"
         android:visibility="gone"
         />
 
