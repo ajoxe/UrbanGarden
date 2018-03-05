@@ -80,6 +80,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             // Got last known location. In some rare situations this can be null.
                             if (location != null) {
                                 // Logic to handle location object
+
                                 double lat = location.getLatitude();
                                 double lng = location.getLongitude();
                                 mMap.addMarker(new MarkerOptions().position(new LatLng(lat, lng)).title("Current Location").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher_round)));
@@ -100,19 +101,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 //        it works, but we need to get a complete address to get an correct location, the current address we get only has street number and name
         Geocoder coder = new Geocoder(getApplicationContext());
-        List<Address> address1;
+        List <Address> address1;
         LatLng p1 = null;
-
-        try {
-            // May throw an IOException
-            address1 = coder.getFromLocationName(address, 5);
-            if (address1 != null) {
-                Address location = address1.get(0);
-                p1 = new LatLng(location.getLatitude(), location.getLongitude());
-                mMap.addMarker(new MarkerOptions().position(p1).title(name).icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher_round)));
+        if (address != null) {
+            try {
+                // May throw an IOException
+                address1 = coder.getFromLocationName(address, 5);
+                if (address1 != null) {
+                    Address location = address1.get(0);
+                    p1 = new LatLng(location.getLatitude(), location.getLongitude());
+                    mMap.addMarker(new MarkerOptions().position(p1).title(name).icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher_round)));
+                }
+            } catch (IOException ex) {
+                ex.printStackTrace();
             }
-        } catch (IOException ex) {
-            ex.printStackTrace();
         }
     }
 
