@@ -109,25 +109,28 @@
             android:layout_height="wrap_content"
             android:hint="Community Gardens in "
             android:ellipsize="end"
-            android:visibility="gone"
             android:textSize="16sp"
+            android:text="Gardens"
             android:layout_gravity="center_vertical"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Title.Inverse"
             android:textColor="@color/colorPrimary"
+            android:visibility="gone"
             />
         <TextView
             android:id="@+id/search_toggle_text_view"
             android:layout_width="0dp"
-            android:layout_weight=".5"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:drawableRight="@android:drawable/ic_menu_more"
             android:drawableTint="@color/colorPrimaryDark"
+            android:text="Search"
+            android:textSize="16sp"
             android:gravity="center_vertical"
-            android:visibility="gone"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium.Inverse"
             android:textColor="@color/colorPrimary"
             android:paddingLeft="@dimen/layout_padding"
+            android:visibility="gone"
             />
 
     </LinearLayout>

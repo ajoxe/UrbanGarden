@@ -39,6 +39,7 @@ import android.widget.TextView;
 
 
 import com.example.android.urbangarden.controller.GardenAdapter;
+import com.example.android.urbangarden.database.DummyDataUtility;
 import com.example.android.urbangarden.database.GardensDataManager;
 import com.example.android.urbangarden.database.GardensDatabase;
 import com.example.android.urbangarden.location.GPSTracker;
@@ -95,6 +96,8 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
     private final String TAG = getClass().getSimpleName();
     private Menu menu;
 
+    DummyDataUtility dummyData = new DummyDataUtility();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,7 +112,7 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
         searchToggle = (TextView) findViewById(R.id.search_toggle_text_view);
         searchLayout = (LinearLayout) findViewById(R.id.search_layout);
         textBanner = (TextView) findViewById(R.id.gardens_banner_text_view);
-        zipButton =(Button) findViewById(R.id.zip_button);
+        zipButton = (Button) findViewById(R.id.zip_button);
 
 
         setToggleClick();
@@ -121,7 +124,6 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
         searchEditText = (EditText) findViewById(R.id.search_query_edit_text);
         mapButton = (Button) findViewById(R.id.map_button);
         logoBackground = (ImageView) findViewById(R.id.logo_back_image);
-
 
 
         searchEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -136,8 +138,6 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
                 return handled;
             }
         });
-
-
 
 
         getSupportActionBar().setBackgroundDrawable(getDrawable(R.drawable.applbarleaves));
@@ -155,13 +155,15 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
             }
         });
     }
-    public void seeMapClick(View view){
+
+    public void seeMapClick(View view) {
         Intent intent = new Intent(GardenSearchActivity.this, MapsActivity.class);
         intent.putExtra("GardenAddressList", addressArray);
         intent.putExtra("GardenNameList", nameArray);
         startActivity(intent);
     }
-    public void onZipClick(View view){
+
+    public void onZipClick(View view) {
         zipButton.setBackgroundColor(Color.parseColor("#90d0ab"));
         zipButton.setTextColor(Color.parseColor("#ffffff"));
         searchEditText.setVisibility(View.VISIBLE);
@@ -193,12 +195,12 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
             textBanner.setText("Community Gardens in " + zipEditTextString);
             textBanner.setVisibility(View.VISIBLE);
 
-        } else if (!spinnerChoiceResult.equals("")){
+        } else if (!spinnerChoiceResult.equals("")) {
             queryType = "boro";
             searchQuery = spinnerChoiceResult;
             textBanner.setText(spinnerOption + " Community Gardens");
             textBanner.setVisibility(View.VISIBLE);
-        } else{
+        } else {
             //TODO location logic for queries and parameters
         }
 
@@ -209,40 +211,56 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
             public void updateUI(Garden[] gardens) {
                 Log.d("update UI", String.valueOf(gardens.length));
 
-                if(gardenList.size() != 0){
+                if (gardenList.size() != 0) {
                     gardenList.clear();
                 }
-                gardenList.addAll(Arrays.asList(gardens));
-                gardenAdapter.notifyDataSetChanged();
+                if (gardens.length == 0) {
+                    //load dummy data
+                    loadDummyData();
+                } else {
+                    gardenList.addAll(Arrays.asList(gardens));
+                    gardenAdapter.notifyDataSetChanged();
+                }
+                loadMapData();
                 GardensDataManager.populateDBWithList(gardenList, GardensDatabase.getGardensDatabase(context));
-                addressArray = new String[gardenList.size()];
-                for (int i = 0; i< gardenList.size(); i++){
-                    addressArray[i] = gardenList.get(i).getAddress() + "New York, NY";
-                }
-                nameArray = new String[gardenList.size()];
-                for (int i = 0; i< gardenList.size(); i++){
-                    nameArray[i] = gardenList.get(i).getGarden_name();
-                }
-                mapButton.setVisibility(View.VISIBLE);
             }
 
             @Override
             public void onFailureAlert() {
 
                 alertUserAboutError();
-
+                loadDummyData();
+                loadMapData();
             }
         });
 
     }
 
-    public void makeCallWithZip(String zip, String type){
+    public void loadDummyData() {
+        gardenList.addAll(dummyData.buildDummyList(getApplicationContext()));
+        gardenAdapter.notifyDataSetChanged();
+    }
+
+    public void loadMapData() {
+        addressArray = new String[gardenList.size()];
+        for (int i = 0; i < gardenList.size(); i++) {
+            addressArray[i] = gardenList.get(i).getAddress() + "New York, NY";
+        }
+        nameArray = new String[gardenList.size()];
+        for (int i = 0; i < gardenList.size(); i++) {
+            nameArray[i] = gardenList.get(i).getGarden_name();
+        }
+        mapButton.setVisibility(View.VISIBLE);
+
+    }
+
+    public void makeCallWithZip(String zip, String type) {
 
         makeNetworkCall(zip, type, new RetrofitListener() {
             @Override
             public void updateUI(Garden[] gardens) {
                 Log.d("update UI", String.valueOf(gardens.length));
-                if(gardenList.size() != 0){
+                if (gardenList.size() != 0) {
                     gardenList.clear();
                 }
                 gardenList.addAll(Arrays.asList(gardens));
@@ -258,7 +276,7 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
 
     }
 
-    public void makeCallWithBoro(String searchQuery, String queryType){
+    public void makeCallWithBoro(String searchQuery, String queryType) {
 
     }
 
@@ -277,7 +295,7 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
     //spinner selection on click
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        if (((TextView) parent.getChildAt(0))!= null){
+        if (((TextView) parent.getChildAt(0)) != null) {
             ((TextView) parent.getChildAt(0)).setTextColor(Color.parseColor("#90d0ab"));
             ((TextView) parent.getChildAt(0)).setTextSize(14);
         }
@@ -420,7 +438,7 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
         }
     }
 
-    public void setToggleClick(){
+    public void setToggleClick() {
         searchToggle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -443,7 +461,7 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
     }
 
     public static void hideSoftKeyboard(Activity activity) {
-        try{
+        try {
             if (activity != null) {
                 InputMethodManager inputMethodManager =
                         (InputMethodManager) activity.getSystemService(
@@ -452,12 +470,11 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
                         activity.getCurrentFocus().getWindowToken(), 0);
             }
 
-        }catch (NullPointerException n){
+        } catch (NullPointerException n) {
             n.printStackTrace();
         }
 
     }
-
 
 
     public void setupUI(View view) {

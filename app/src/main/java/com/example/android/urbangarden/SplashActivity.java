@@ -28,7 +28,7 @@ public class SplashActivity extends AppCompatActivity {
 
     public void setDummyData(){
         DummyDataUtility dummyDataUtility = new DummyDataUtility();
-        dummyDataUtility.buildGuideList(getApplicationContext());
+        dummyDataUtility.buildDummyList(getApplicationContext());
         List<Garden> allGardens = new ArrayList<>();
         final List<Garden> gardens = new ArrayList<>();
         final List<Garden> savedGardens = new ArrayList<>();
