@@ -13,5 +13,8 @@
     <string name="Ok_message">OK</string>
     <string name="search_option_toggle">search</string>
     <string name="title_activity_garden_maps">GardenMap</string>
+    <string name="profile_quote">“Nature is impersonal, awe-inspiring, elegant, eternal. It\'s geometrically perfect. It\'s tiny and gigantic. You can travel far to be in a beautiful natural setting, or you can observe it in your backyard - or, in my case, in the trees lining New York City sidewalks, or in the clouds above skyscrapers.”
+\n\n-Gretchen Rubin
+</string>
 
 </resources>

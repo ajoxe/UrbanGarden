@@ -31,6 +31,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
@@ -69,6 +70,7 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
     TextView textBanner;
     Button zipButton;
     Button mapButton;
+    ImageView logoBackground;
 
 
     String spinnerOption;
@@ -118,6 +120,7 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
         searchEditText = (EditText) findViewById(R.id.search_query_edit_text);
         mapButton = (Button) findViewById(R.id.map_button);
+        logoBackground = (ImageView) findViewById(R.id.logo_back_image);
 
 
 
@@ -180,6 +183,7 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
     public void onSearchClick(View view) {
         searchLayout.setVisibility(View.GONE);
         searchToggle.setVisibility(View.VISIBLE);
+        logoBackground.setVisibility(View.GONE);
 
         zipEditTextString = searchEditText.getText().toString();
 
@@ -352,7 +356,7 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
                 Log.e(TAG, "login button was clicked");
                 break;
 
-            case R.id.user_profile:
+           /* case R.id.user_profile:
                 Intent intent0 = new Intent(GardenSearchActivity.this, UserActivity.class);
 //                intent.putExtra("myGardenList", "");
                 startActivity(intent0);
@@ -364,7 +368,7 @@ public class GardenSearchActivity extends AppCompatActivity implements AdapterVi
 //                intent.putExtra("myGardenList", "");
                 startActivity(intent1);
                 Log.e(TAG, "my posts button was clicked");
-                break;
+                break;*/
 
             case R.id.fav_list:
                 GardensDataManager.getSavedGardens(GardensDatabase.getGardensDatabase(getApplicationContext()));

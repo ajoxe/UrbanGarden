@@ -132,19 +132,19 @@ public class GardenDetailActivity extends AppCompatActivity {
                 Log.e(TAG, "login button was clicked");
                 break;
 
-            case R.id.user_profile:
+            /*case R.id.user_profile:
                 Intent intent0 = new Intent(GardenDetailActivity.this, UserActivity.class);
 //                intent.putExtra("myGardenList", "");
                 startActivity(intent0);
                 Log.e(TAG, "my posts button was clicked");
-                break;
+                break;*//*
 
             case R.id.my_posts:
                 Intent intent1 = new Intent(GardenDetailActivity.this, MyPostsActivity.class);
 //                intent.putExtra("myGardenList", "");
                 startActivity(intent1);
                 Log.e(TAG, "my posts button was clicked");
-                break;
+                break;*/
 
             case R.id.fav_list:
                 GardensDataManager.getSavedGardens(GardensDatabase.getGardensDatabase(getApplicationContext()));

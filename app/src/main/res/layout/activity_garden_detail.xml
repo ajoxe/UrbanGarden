@@ -85,7 +85,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:textColor="@color/colorPrimary"
             android:text="Add to Favorites" />
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Join this Garden"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/colorBrown"
+            android:textAllCaps="true"
+            android:letterSpacing=".1"
+            android:layout_gravity="end"
+            android:textSize="10sp"
+            android:drawableEnd="@android:drawable/ic_input_add"
+            android:drawableTint="@color/colorBrown"/>
 
         <TextView
             android:layout_width="match_parent"
