@@ -9,12 +9,15 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
+        android:name=".ExampleApplication"
         android:allowBackup="true"
         android:icon="@drawable/leaflogodarkergreen"
         android:label="@string/app_name"
         android:roundIcon="@drawable/leaflogodarkergreen"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:hardwareAccelerated="false"
+        android:largeHeap="true">
         <activity
             android:name=".GardenSearchActivity"
             android:theme="@style/ActionBar" />
@@ -33,6 +36,7 @@
         <activity
             android:name=".MyGardensActivity"
             android:theme="@style/ActionBar" />
+
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -64,6 +68,7 @@
         <activity
             android:name=".userloginandregister.UserActivity"
             android:theme="@style/ActionBar" />
+
     </application>
 
 </manifest>
